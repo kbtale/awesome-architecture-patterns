@@ -164,7 +164,7 @@ Structural organizations that define how internal modules, execution tiers, or p
     - [nopSolutions/nopCommerce](https://github.com/nopSolutions/nopCommerce): An open-source e-commerce platform structured as a layered ASP.NET application.
   - **Resources:**
     - "Software Architecture Patterns" by Mark Richards: The chapter on Layered Architecture provides a breakdown of isolated vs. open layers.
-    - [Software Architecture Patterns: Layered Architecture](https://www.oreilly.com/library/view/software-architecture-patterns/9781491971437/ch01.html) by University of Waterloo: An academic overview of the pattern's constraints and benefits.
+    - [Software Architecture Patterns: Layered Architecture](https://www.oreilly.com/library/view/software-architecture-patterns/9781491971437/ch01.html) by O'Reilly Media: An explanation of the Layered Architecture pattern and its constraints.
 
 - **Microkernel Architecture (Plug-in Architecture):** A minimal core system with fundamental logic, surrounded by independent plug-in modules that provide extensible features.
   Designed for extreme extensibility. It relies on a minimal core system that handles fundamental operations and lifecycle management. All extended features, custom logic, and integrations are pushed into independent, isolated plug-in modules. This allows third-party developers to add massive amounts of functionality without modifying the core codebase. It is the dominant architecture for IDEs, web browsers, and task orchestration tools.
@@ -225,21 +225,107 @@ Structural organizations that define how internal modules, execution tiers, or p
 Macro-architectures built specifically to ingest, store, route, and process massive volumes of information across distributed clusters or unified planes.
 
 - **Lambda Architecture:** Designed for big data processing, combining batch processing for comprehensive views and stream processing for real-time views.
+  An approach to big data processing that provides a robust, fault-tolerant system against hardware failures and human mistakes. It processes massive quantities of data by providing both batch-processing and stream-processing methods simultaneously. The batch layer manages the historical archive and computes accurate views, while the speed layer handles recent data for low-latency queries. The serving layer indexes the output for fast querying.
+  - **Examples:**
+    - [apache/spark](https://github.com/apache/spark): Unified analytics engine for large-scale data processing, often used to implement both the batch and speed layers.
+    - [apache/storm](https://github.com/apache/storm): A distributed realtime computation system frequently used for the speed layer in Lambda architectures.
+  - **Resources:**
+    - [How to beat the CAP theorem](http://nathanmarz.com/blog/how-to-beat-the-cap-theorem.html) by Nathan Marz: The original blog post introducing the Lambda Architecture.
+    - "Big Data: Principles and best practices of scalable realtime data systems" by Nathan Marz and James Warren: The comprehensive book on building Lambda architectures.
+
 - **Kappa Architecture:** A simplification of Lambda, using a single stream processing engine for both real-time and batch data.
+  A data processing architecture designed to simplify the complexities of large-scale data systems. It uses a single technology stack for both real-time and batch processing, treating everything as a continuous stream of events. Historical data is re-processed by replaying the event stream through the same processing engine used for real-time data, maintaining a unified pipeline for all computations.
+  - **Examples:**
+    - [apache/kafka](https://github.com/apache/kafka): A distributed event streaming platform acting as the central immutable log and stream processing backbone for Kappa architectures.
+    - [apache/flink](https://github.com/apache/flink): A framework and distributed processing engine for stateful computations over unbounded and bounded data streams.
+  - **Resources:**
+    - [Questioning the Lambda Architecture](https://www.oreilly.com/radar/questioning-the-lambda-architecture/) by Jay Kreps: The original article proposing the Kappa Architecture as an alternative to Lambda.
+    - [Kappa Architecture Introduction](https://hazelcast.com/glossary/kappa-architecture/) by Hazelcast: A clear breakdown of the Kappa architecture principles.
+
 - **MapReduce Architecture:** A programming model for processing large datasets in parallel across a distributed cluster.
+  A processing technique and program model for distributed computing. The algorithm contains two distinct phases: Map and Reduce. The Map phase takes a set of data and converts it into another set of data, breaking individual elements into tuples (key/value pairs). The Reduce phase takes the output from the map phase as input and combines those data tuples into a condensed set of results.
+  - **Examples:**
+    - [apache/hadoop](https://github.com/apache/hadoop): The original open-source framework that implemented the MapReduce programming model for distributed storage and processing.
+    - [apache/couchdb](https://github.com/apache/couchdb): A document-oriented NoSQL database that uses MapReduce as its primary mechanism for building views and querying data.
+  - **Resources:**
+    - [MapReduce: Simplified Data Processing on Large Clusters](https://research.google/pubs/pub62/) by Jeffrey Dean and Sanjay Ghemawat: The foundational Google research paper that introduced MapReduce to the world.
+    - [Hadoop MapReduce Tutorial](https://hadoop.apache.org/docs/current/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html) by Apache Software Foundation: Official documentation and guides for implementing MapReduce jobs.
+
 - **Batch Sequential Architecture:** Programs run independently in a predefined order, passing data as files; used in traditional data processing.
+  A classic data processing pattern where separate, independent programs execute in a strict sequence. Each program runs to completion, reads an input file, processes the data, and writes an output file that becomes the input for the exact next program in the sequence. It is highly effective for scheduled, high-volume data transformations like end-of-day financial reconciliation or payroll processing.
+  - **Examples:**
+    - [spring-projects/spring-batch](https://github.com/spring-projects/spring-batch): A lightweight, comprehensive batch framework designed to enable the development of robust batch applications essential for the daily operations of enterprise systems.
+    - [apache/airflow](https://github.com/apache/airflow): A platform created by the community to programmatically author, schedule, and monitor batch workflows and data pipelines.
+  - **Resources:**
+    - [Batch Processing Documentation](https://docs.spring.io/spring-batch/reference/) by Spring: Comprehensive guidelines on structuring and managing batch sequential jobs.
+    - [Enterprise Integration Patterns: Process Manager](https://www.enterpriseintegrationpatterns.com/patterns/messaging/ProcessManager.html) by Gregor Hohpe: Architectural patterns related to routing and sequential processing of large workloads.
+
 - **Database Systems Architecture:** Centralized data store accessed by multiple, independent computations (classic 3-tier applications).
+  An architecture where a robust, centralized database management system acts as the core of the application. Multiple separate application instances or services connect to this shared database to read, write, and manipulate data. The database itself handles concurrency, transaction integrity, and data security, acting as the single source of truth for the entire distributed system.
+  - **Examples:**
+    - [postgres/postgres](https://github.com/postgres/postgres): The core repository for PostgreSQL, representing the gold standard for centralized, relational database systems.
+    - [mysql/mysql-server](https://github.com/mysql/mysql-server): The core repository for MySQL, widely used as the centralized data store in traditional web architectures.
+  - **Resources:**
+    - "Database System Concepts" by Abraham Silberschatz, Henry F. Korth, and S. Sudarshan: The definitive academic textbook detailing the architecture of database management systems.
+    - [Architecture of a Database System](https://dsf.berkeley.edu/papers/fntdb07-architecture.pdf) by Joseph M. Hellerstein, Michael Stonebraker, and James Hamilton: An in-depth paper on how relational database engines are constructed.
+
 - **Data Mesh:** A decentralized sociotechnical architecture that treats data as a product, with domain teams owning and serving their data.
-- **Data Fabric:** An architecture that provides a unified, intelligent data plane across hybrid and multi-cloud environments.
+  A decentralized approach to data architecture that distributes responsibility directly to the specific business domains that generate the data. Each domain team owns its data pipelines and serves its data as a fully functional "product" to the rest of the organization. A federated governance structure ensures these distinct data products remain interoperable and secure across the broader enterprise. Because Data Mesh is an organizational paradigm and not a single software package, the examples below represent the core open-source tools used to build a mesh.
+  - **Examples (Building Blocks):**
+    - [apache/iceberg](https://github.com/apache/iceberg): An open table format for huge analytic datasets, heavily utilized by domain teams to build and serve decentralized data products.
+    - [amundsen-io/amundsen](https://github.com/amundsen-io/amundsen): A data discovery and metadata engine used to locate and understand the decentralized data products across the mesh.
+  - **Resources:**
+    - [How to Move Beyond a Monolithic Data Lake to a Distributed Data Mesh](https://martinfowler.com/articles/data-monolith-to-mesh.html) by Zhamak Dehghani: The original article introducing the Data Mesh paradigm.
+    - "Data Mesh: Delivering Data-Driven Value at Scale" by Zhamak Dehghani: The comprehensive book detailing the implementation and organizational shifts required for a data mesh.
+
+- **Data Fabric:** An architecture that provides a unified data plane across hybrid and multi-cloud environments.
+  An architecture that utilizes machine learning and metadata to automatically discover, connect, and secure data across disparate systems and cloud providers. It creates a unified, virtualized data layer, allowing users and applications to access information seamlessly across all physical locations and storage formats. Like Data Mesh, Data Fabric is an enterprise-wide integration strategy rather than a single application, so the examples below represent the federated querying and governance tools required to build it.
+  - **Examples (Building Blocks):**
+    - [trinodb/trino](https://github.com/trinodb/trino): A distributed SQL query engine designed to query large data sets distributed over heterogeneous data sources, acting as the federated query layer of a data fabric.
+    - [apache/atlas](https://github.com/apache/atlas): A scalable and extensible set of core foundational governance services enabling enterprises to manage the metadata required to bind a data fabric together.
+  - **Resources:**
+    - [What is a Data Fabric?](https://www.ibm.com/topics/data-fabric) by IBM: A clear definition and overview of the components that make up a data fabric.
+    - [What is a Data Fabric?](https://www.sap.com/insights/what-is-a-data-fabric.html) by SAP: A detailed breakdown of data fabric concepts, core components, and how it unifies data management across environments.
 
 ## **Event, Messaging & Communication Topologies**
 
 Distributed models dictating how disparate services exchange information, react to state changes, and manage request routing dynamically.
 
 - **Event-Driven Architecture (Macro):** A distributed system where components react to state changes (events) broadcast across the network, rather than relying on direct request/response.
+  A highly decoupled topology built around the production, detection, and consumption of state changes. Services publish events to a central broker or event bus. Subscribed services listen for these events and trigger their own isolated business logic asynchronously. It is essential for building highly responsive, scalable systems where unpredictable spikes in traffic are absorbed by queues to protect downstream databases.
+  - **Examples:**
+    - [microservices-patterns/ftgo-application](https://github.com/microservices-patterns/ftgo-application): The reference application for the "Microservices Patterns" book, built entirely on an event-driven architecture using sagas and transactional outboxes.
+    - [aws-samples/aws-serverless-airline-booking](https://github.com/aws-samples/aws-serverless-airline-booking): A complete serverless application built on AWS utilizing an event-driven architecture to coordinate distinct booking services via EventBridge.
+  - **Resources:**
+    - [What is an Event-Driven Architecture?](https://aws.amazon.com/event-driven-architecture/) by AWS: A guide to the components and benefits of event-driven systems.
+    - "Designing Event-Driven Systems" by Ben Stopford: A comprehensive book on building event-centric architectures.
+
 - **Process Communication (Communicating Processes) Architecture:** Independent processes communicate through channels like sockets, message queues, or shared memory.
+  A foundational concurrency model where an application is divided into isolated, concurrently executing processes that pass messages to one another to coordinate work. By ensuring processes share only explicitly passed messages through strictly defined channels, the system prevents race conditions and complex locking mechanisms. It is the architectural basis for highly concurrent systems like telecom switches, chat servers, and distributed databases.
+  - **Examples:**
+    - [rabbitmq/rabbitmq-server](https://github.com/rabbitmq/rabbitmq-server): While used as a message broker by others, its internal architecture is a prime example of the Erlang Actor model, utilizing thousands of isolated, communicating processes to handle massive concurrency.
+    - [syncthing/syncthing](https://github.com/syncthing/syncthing): A continuous file synchronization program written in Go, architected internally around Communicating Sequential Processes (CSP) using goroutines and channels to pass messages safely between syncing operations.
+  - **Resources:**
+    - [Communicating Sequential Processes](http://www.usingcsp.com/cspbook.pdf) by C.A.R. Hoare: The foundational computer science paper defining the CSP architectural style.
+    - [The Actor Model](https://doc.akka.io/docs/akka/current/typed/guide/actors-intro.html) by Akka: Documentation explaining how concurrent processes communicate via message passing.
+
 - **Service Mesh Architecture:** A dedicated infrastructure layer for managing service-to-service communications in microservices architectures, typically using a sidecar proxy to handle routing, security, and observability without altering application code.
+  An operational topology that abstracts the network layer away from the application code. Network capabilities like retry logic, mutual TLS encryption, and distributed tracing are handled by a sidecar proxy deployed alongside every service instance. The interconnected web of these proxies forms the mesh, controlled by a central control plane. It is crucial for maintaining security, observability, and traffic control in massive Kubernetes deployments.
+  - **Examples:**
+    - [istio/istio/tree/master/samples/bookinfo](https://github.com/istio/istio/tree/master/samples/bookinfo): The official polyglot reference application specifically engineered to demonstrate Service Mesh traffic routing, fault injection, and metrics across different language backends.
+    - [GoogleCloudPlatform/microservices-demo](https://github.com/GoogleCloudPlatform/microservices-demo): Google's 11-tier application (Online Boutique) explicitly architected to be deployed onto a service mesh to handle service-to-service communication.
+  - **Resources:**
+    - [What is a Service Mesh?](https://www.redhat.com/en/topics/microservices/what-is-a-service-mesh) by Red Hat: A clear breakdown of the data plane, control plane, and sidecar proxy concepts.
+    - "Istio up and Running" by Lee Calcote and Zack Butcher: A practical guide to implementing a service mesh architecture.
+
 - **API Gateway / Backends for Frontends (BFF) Architecture:** A single entry point (gateway) or multiple client-specific backends (BFF) that handle routing, composition, and cross-cutting concerns for APIs.
+  A structural pattern used to abstract the complexity of backend microservices. An API Gateway acts as a reverse proxy, aggregating multiple microservice calls into a single response, handling authentication, rate limiting, and request routing. The Backends for Frontends (BFF) variant takes this further by creating dedicated, separate gateways tailored specifically for different UI clients (e.g., one API for mobile, a different one for desktop web). This ensures clients receive the exact data they require, formatted perfectly for their specific interface.
+  - **Examples:**
+    - [dotnet/eShop](https://github.com/dotnet/eShop): Microsoft's reference microservices application which explicitly implements the Backends for Frontends (BFF) pattern, featuring entirely separate gateway routing configurations for its Web UI and Mobile clients.
+    - [GoogleCloudPlatform/microservices-demo](https://github.com/GoogleCloudPlatform/microservices-demo): Features a dedicated `frontend` service acting as the single API Gateway that orchestrates calls to the various backend services (cart, product catalog, currency, etc.) to render the final web views.
+  - **Resources:**
+    - [Pattern: Backends For Frontends](https://samnewman.io/patterns/architectural/bff/) by Sam Newman: The original definition and deep dive into the BFF architectural pattern.
+    - [API Gateway Pattern](https://microservices.io/patterns/apigateway.html) by Chris Richardson: A comprehensive look at the benefits and drawbacks of using a unified API gateway.
 
 ## **Concurrency, State & Transactional Topologies**
 
