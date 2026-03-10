@@ -1,4 +1,36 @@
-# **Level 1: System Architecture Patterns (Macro-Level Topology)**
+<div align="center">
+
+<h1>Awesome Architecture Patterns</h1>
+Choose a language
+
+[![English](https://img.shields.io/badge/-English-blue.svg)](README.md) [![Español](https://img.shields.io/badge/-Español-red.svg)](README.es.md) [![中文](https://img.shields.io/badge/-中文-lightgrey.svg)](README.zh.md)
+
+</div>
+
+A multi-level taxonomy of software architecture and design patterns. This repository attempts to categorize the structural building blocks of software engineering, scaling from macro-level cloud topologies down to micro-level object interactions, while also covering cross-cutting concerns and high-level enterprise frameworks.
+
+My goal is to build a centralized index of resources, documentation, and implementation examples for every architectural pattern and variant available.
+
+## References
+
+This compilation synthesizes and organizes concepts from several foundational software engineering works and industry standards:
+* **Pattern-Oriented Software Architecture (POSA)** by Frank Buschmann, Regine Meunier, Hans Rohnert, Peter Sommerlad, and Michael Stal.
+* **The C4 Model** for visualizing software architecture by Simon Brown.
+* **Enterprise Integration Patterns** by Gregor Hohpe and Bobby Woolf.
+* **Design Patterns: Elements of Reusable Object-Oriented Software (Gang of Four)** by Erich Gamma, Richard Helm, Ralph Johnson, and John Vlissides.
+* **Domain-Driven Design (DDD)** by Eric Evans.
+* **Clean Architecture** by Robert C. Martin.
+
+## Table of Contents
+
+* [Layer 1: System Architecture Patterns](#layer-1-system-architecture-patterns)
+* [Layer 2: Enterprise Integration Patterns](#layer-2-enterprise-integration-patterns)
+* [Layer 3: Application Architecture Patterns](#layer-3-application-architecture-patterns)
+* [Layer 4: Software Design Patterns](#layer-4-software-design-patterns)
+* [Cross-Cutting Architectural Concerns](#cross-cutting-architectural-concerns)
+* [Enterprise Architecture Frameworks](#enterprise-architecture-frameworks)
+
+# **Layer 1: System Architecture Patterns**
 
 ## **Core Application Deployment Topologies**
 
@@ -89,9 +121,9 @@ Architectures fundamentally based on centralizing shared data access or connecti
 
 ---
 
-# **Level 2: Enterprise Integration Patterns**
+# **Layer 2: Enterprise Integration Patterns**
 
-*(Communication and data flow between major components or services)*
+*Communication and data flow between major components or services*
 
 ## **Message Channel Patterns**
 
@@ -192,9 +224,9 @@ Bridging techniques that safely synchronize strict database transactions with ev
 
 ---
 
-# **Level 3: Application Architecture Patterns**
+# **Layer 3: Application Architecture Patterns**
 
-*(Internal structure of a single application or service)*
+*Internal structure of a single application or service*
 
 ## **Presentation / UI Architecture Patterns**
 
@@ -288,13 +320,13 @@ Specialized structural objects used in automated testing to isolate the code und
 
 ---
 
-# **Level 4: Software Design Patterns (Gang of Four & Modern)**
+# **Layer 4: Software Design Patterns**
 
-*(Micro-level solutions for object-oriented design problems)*
+*Micro-level solutions for object-oriented design problems*
 
 ## **Creational Patterns**
 
-(Patterns that abstract the instantiation process, making a system independent of how its objects are created, composed, and represented)
+*Patterns that abstract the instantiation process, making a system independent of how its objects are created, composed, and represented*
 
 - **Singleton:** Ensures a class has only one instance and provides a global point of access to it.
 - **Factory Method:** Defines an interface for creating an object but lets subclasses alter the type of objects that will be created.
@@ -305,7 +337,7 @@ Specialized structural objects used in automated testing to isolate the code und
 
 ## **Structural Patterns**
 
-(Patterns that deal with how classes and objects are composed to form larger structures)
+*Patterns that deal with how classes and objects are composed to form larger structures*
 
 - **Adapter:** Allows incompatible interfaces to work together by wrapping an otherwise incompatible object in an adapter.
 - **Bridge:** Decouples an abstraction from its implementation so the two can vary independently.
@@ -317,7 +349,7 @@ Specialized structural objects used in automated testing to isolate the code und
 
 ## **Behavioral Patterns**
 
-(Patterns concerned with algorithms and the assignment of responsibilities between objects)
+*Patterns concerned with algorithms and the assignment of responsibilities between objects*
 
 - **Strategy:** Defines a family of algorithms, encapsulates each one, and makes them interchangeable at runtime.
 - **State:** Allows an object to alter its behavior when its internal state changes, appearing as if it changed its class.
@@ -334,7 +366,7 @@ Specialized structural objects used in automated testing to isolate the code und
 
 ## **Concurrency Patterns**
 
-(Patterns that handle multi-threading paradigms and parallel processing)
+*Patterns that handle multi-threading paradigms and parallel processing*
 
 - **Active Object:** Decouples method execution from method invocation to enhance concurrency and simplify synchronized access to objects that reside in their own threads of control.
 - **Monitor Object:** Synchronizes concurrent method execution to ensure only one method at a time runs within an object, safely encapsulating mutual exclusion.
@@ -345,7 +377,7 @@ Specialized structural objects used in automated testing to isolate the code und
 
 ## **Functional Patterns**
 
-(Patterns derived from functional programming paradigms adapted for modern software design)
+*Patterns derived from functional programming paradigms adapted for modern software design*
 
 - **Monad:** A design pattern used to describe computations as a series of steps, handling side effects, state, or I/O in a purely functional way.
 - **Functor:** A mapping pattern that allows a function to be applied to values wrapped in a context, preserving the structure of that context.
@@ -357,7 +389,7 @@ Specialized structural objects used in automated testing to isolate the code und
 
 # Cross-Cutting Architectural Concerns
 
-(Patterns that permeate all layers and boundaries of a system)
+*Patterns that permeate all layers and boundaries of a system*
 
 ## **Security Architecture Patterns**
 
@@ -423,7 +455,7 @@ Decentralized system models enabling multiple autonomous entities or nodes to se
 
 ## **Enterprise Architecture Frameworks**
 
-*(Holistic frameworks for managing the entire enterprise's architecture; these are not software architectures per se but define categories of architecture from a business and IT strategy perspective)*
+*Holistic frameworks for managing the entire enterprise's architecture; these are not software architectures per se but define categories of architecture from a business and IT strategy perspective*
 
 - **Business Architecture:** Defines business strategy, governance, organization, and key business processes.
 - **Information Architecture (Data Architecture):** Describes the structure of an organization's logical and physical data assets and data management resources.
