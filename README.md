@@ -36,12 +36,57 @@ This compilation synthesizes and organizes concepts from several foundational so
 
 Broad structural paradigms defining how the primary functional units of an application are packaged, scaled, and deployed over underlying infrastructure.
 
-- **Monolithic Architecture:** A unified model where the entire application is built, packaged, and deployed as a single unit.
-- **Modular Monolith Architecture:** A monolith internally structured into modules based on business capabilities, allowing for potential extraction into microservices later.
-- **Microservices Architecture:** An application decomposed into small, loosely coupled, independently deployable services, each with its own database.
-- **Service-Oriented Architecture (SOA):** Coarse-grained, reusable services provide business functionality via a communications protocol, often mediated by an Enterprise Service Bus (ESB).
-- **Serverless Architecture (Function-as-a-Service / FaaS):** Applications are divided into ephemeral, event-triggered functions where the cloud provider dynamically manages the allocation and provisioning of servers.
-- **Cell-Based Architecture:** The system is divided into isolated, self-contained "cells" to limit failure blast radius and enable massive scale.
+**Monolithic Architecture:** A unified model where the entire application is built, packaged, and deployed as a single unit.
+  - **Examples:**
+    - [gitlabhq/gitlabhq](https://github.com/gitlabhq/gitlabhq): The core GitLab monolithic application built heavily on Ruby on Rails.
+    - [discourse/discourse](https://github.com/discourse/discourse): The widely used open-source discussion platform monolith.
+    - [mastodon/mastodon](https://github.com/mastodon/mastodon): The primary server application for the decentralized social network.
+  - **Resources:**
+    - [MonolithFirst](https://martinfowler.com/bliki/MonolithFirst.html) by Martin Fowler: An essay on why starting with a monolith is often the best approach.
+    - [The Majestic Monolith](https://m.signalvnoise.com/the-majestic-monolith/) by DHH: An argument for the benefits of monolithic architectures by the creator of Ruby on Rails.
+
+**Modular Monolith Architecture:** A monolith internally structured into modules based on business capabilities, allowing for potential extraction into microservices later.
+  - **Examples:**
+    - [spring-projects/spring-modulith](https://github.com/spring-projects/spring-modulith): An official Spring extension for building and verifying modular monoliths in Java.
+    - [kgrzybek/modular-monolith-with-ddd](https://github.com/kgrzybek/modular-monolith-with-ddd): A comprehensive .NET reference implementation using strict Domain-Driven Design boundaries.
+    - [Shopify/packwerk](https://github.com/Shopify/packwerk): A static analysis tool created by Shopify to enforce modular boundaries within large Ruby applications.
+  - **Resources:**
+    - [Deconstructing the Monolith](https://shopify.engineering/deconstructing-monolith-designing-software-that-grows) by Shopify Engineering: A detailed case study on Shopify's transition to a modular monolith.
+    - "Modular Monoliths" by Simon Brown: Structural guidelines for maintaining clean boundaries in a single deployment unit.
+
+**Microservices Architecture:** An application decomposed into small, loosely coupled, independently deployable services, each with its own database.
+  - **Examples:**
+    - [GoogleCloudPlatform/microservices-demo](https://github.com/GoogleCloudPlatform/microservices-demo): Google's 11-tier polyglot reference application (Online Boutique) for Kubernetes and gRPC.
+    - [dotnet/eShop](https://github.com/dotnet/eShop): Microsoft's official cross-platform .NET reference application for microservices and containers.
+    - [microservices-demo/microservices-demo](https://github.com/microservices-demo/microservices-demo): The "Sock Shop" reference application designed to teach polyglot microservice deployments.
+  - **Resources:**
+    - "Building Microservices: Designing Fine-Grained Systems" by Sam Newman: The foundational book on designing, deploying, and maintaining microservices.
+    - [Microservices Resource Guide](https://martinfowler.com/microservices/) by Martin Fowler: A comprehensive collection of articles and definitions.
+
+**Service-Oriented Architecture (SOA):** Coarse-grained, reusable services provide business functionality via a communications protocol, often mediated by an Enterprise Service Bus (ESB).
+  - **Examples:**
+    - [apache/camel-examples](https://github.com/apache/camel-examples): Practical implementations of integration and routing patterns essential for SOA.
+    - [wso2/product-ei](https://github.com/wso2/product-ei): The repository for WSO2 Enterprise Integrator, a classic Enterprise Service Bus (ESB) implementation.
+  - **Resources:**
+    - "SOA in Practice: The Art of Distributed System Design" by Nicolai M. Josuttis: A practical guide to implementing SOA in enterprise environments.
+    - [Service-Oriented Architecture](https://www.ibm.com/topics/soa) by IBM: An architectural overview and history of SOA patterns.
+
+**Serverless Architecture (Function-as-a-Service / FaaS):** Applications are divided into ephemeral, event-triggered functions where the cloud provider dynamically manages the allocation and provisioning of servers.
+  - **Examples:**
+    - [serverless/examples](https://github.com/serverless/examples): A vast collection of real-world examples using the Serverless Framework across AWS, Azure, and GCP.
+    - [aws-samples/aws-serverless-workshops](https://github.com/aws-samples/aws-serverless-workshops): AWS's official repository for serverless training, patterns, and reference architectures.
+    - [Azure/azure-functions-samples](https://github.com/Azure/azure-functions-samples): Microsoft's official template and sample repository for Azure Functions.
+  - **Resources:**
+    - [Serverless Architectures](https://martinfowler.com/articles/serverless.html) by Mike Roberts: A deep dive into the traits and benefits of serverless computing.
+    - "Serverless Architectures on AWS" by Peter Sbarski: A comprehensive guide to building serverless applications.
+
+**Cell-Based Architecture:** The system is divided into isolated, self-contained "cells" to limit failure blast radius and enable massive scale.
+  - **Examples:**
+    - [wso2/cellery](https://github.com/wso2/cellery): A specialized architecture language and tooling set for building composable cells on Kubernetes.
+    - [wso2/reference-architecture](https://github.com/wso2/reference-architecture): The foundational specification and methodology documents defining the Cell-Based Architecture approach.
+  - **Resources:**
+    - [Cell-Based Architecture Reference](https://github.com/wso2/reference-architecture/blob/master/reference-architecture-cell-based.md) by Asanka Abeysinghe: The original whitepaper defining the pattern.
+    - [Workload Isolation Using Shuffle Sharding](https://aws.amazon.com/builders-library/workload-isolation-using-shuffle-sharding/) by AWS Architecture Blog: Amazon's documentation on limiting blast radius using cell-based concepts.
 
 ## **Network & Node Distribution Topologies**
 
