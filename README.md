@@ -708,7 +708,7 @@ Foundational structures defining the virtual pathways through which applications
 A messaging topology designed for distributing discrete units of work. A sender places a message onto a specific channel (usually a queue). While multiple concurrent receivers (workers) can listen to the same channel, the channel guarantees that only a single receiver will successfully consume and process any given message. It is the foundational pattern for load-balancing background tasks and ensuring idempotent execution of commands.
 
 - **Examples:**
-  - [mastodon/mastodon](https://github.com/mastodon/mastodon): Relies heavily on Point-to-Point channels (via Sidekiq and Redis) to distribute asynchronous, heavy-lifting background jobs—like federating posts or processing image uploads—to single, available worker instances.
+  - [mastodon/mastodon](https://github.com/mastodon/mastodon): Relies heavily on Point-to-Point channels (via Sidekiq and Redis) to distribute asynchronous, heavy-lifting background jobs, like federating posts or processing image uploads, to single, available worker instances.
   - [getsentry/sentry](https://github.com/getsentry/sentry): The core Sentry application uses point-to-point task queues (via Celery) to route millions of incoming crash reports to available processors without duplicating work.
 - **Resources:**
   - [Point-to-Point Channel](https://www.enterpriseintegrationpatterns.com/patterns/messaging/PointToPointChannel.html) by Gregor Hohpe: The original Enterprise Integration Patterns definition.
@@ -733,7 +733,7 @@ A messaging topology designed for event notification rather than task distributi
 <details>
 <summary><strong>Dead Letter Channel:</strong> A dedicated channel where the messaging system routes messages that cannot be successfully delivered or processed.</summary>
 
-An error-handling topology for asynchronous systems. When a message encounters a terminal error—such as maxing out its delivery retry attempts, exceeding its Time-To-Live (TTL), or failing schema validation—the message broker automatically removes it from the active processing queue and routes it to a specific Dead Letter Channel. This prevents "poison pill" messages from endlessly clogging up the primary queue while preserving the failed data for manual inspection or automated logging.
+An error-handling topology for asynchronous systems. When a message encounters a terminal error, such as maxing out its delivery retry attempts, exceeding its Time-To-Live (TTL), or failing schema validation, the message broker automatically removes it from the active processing queue and routes it to a specific Dead Letter Channel. This prevents "poison pill" messages from endlessly clogging up the primary queue while preserving the failed data for manual inspection or automated logging.
 
 - **Examples:**
   - *Note on Examples:* The Dead Letter Channel is a granular error-routing configuration implemented *within* message broker infrastructure (like RabbitMQ, Kafka, or AWS SQS). Because it is a specific queue configuration state rather than a standalone software architecture, there are no open-source business application repositories that represent it natively.
@@ -1287,7 +1287,7 @@ A macro-architecture where the "log" is the primary source of truth. Unlike trad
 <details>
 <summary><strong>Log-Based CDC:</strong> A specific, highly efficient type of CDC that reads directly from the database's internal transaction log to capture changes without impacting query performance.</summary>
 
-The "gold standard" for Change Data Capture. While some CDC methods use database triggers or polling (which can slow down the production database), Log-Based CDC reads the database's internal transaction log (like MySQL's binlog or Postgres's WAL) directly from the disk. This allows the system to capture every single change—including deletes and schema updates—with zero overhead on the database's execution engine.
+The "gold standard" for Change Data Capture. While some CDC methods use database triggers or polling (which can slow down the production database), Log-Based CDC reads the database's internal transaction log (like MySQL's binlog or Postgres's WAL) directly from the disk. This allows the system to capture every single change, including deletes and schema updates, with zero overhead on the database's execution engine.
 
 - **Examples:**
   - [debezium/debezium](https://github.com/debezium/debezium): Although often used as a tool, Debezium is the industry-standard implementation of Log-Based CDC. It consists of a set of source connectors that "tail" the transaction logs of databases like MySQL, MongoDB, and Postgres to turn them into event streams.
@@ -1336,7 +1336,7 @@ A distributed tracing pattern that turns a message into its own travel log. As a
 <details>
 <summary><strong>Message Log:</strong> Records the complete, immutable details of every message passing through a system to enable deep auditing and historical replay capabilities.</summary>
 
-A persistence pattern for system accountability. Unlike standard application logging (which records *what* the application did), a Message Log captures the *entire* raw message—including headers and payload—exactly as it appeared on the wire. This creates a high-fidelity audit trail essential for financial systems, compliance, and "Time Travel" debugging, where a faulty message can be retrieved months later to see exactly what triggered a specific system state.
+A persistence pattern for system accountability. Unlike standard application logging (which records *what* the application did), a Message Log captures the *entire* raw message, including headers and payload, exactly as it appeared on the wire. This creates a high-fidelity audit trail essential for financial systems, compliance, and "Time Travel" debugging, where a faulty message can be retrieved months later to see exactly what triggered a specific system state.
 
 - **Examples:**
   - [tryghost/ghost](https://github.com/tryghost/ghost): The open-source publishing platform maintains a robust internal "Activity Log" that functions as a message log, capturing the full metadata and state of every internal API request and integration hook for administrative auditing.
@@ -1387,101 +1387,338 @@ When a modern application must interface with a legacy system or a third-party A
 
 </details>
 
-# **Layer 3: Application Architecture Patterns**
+<details>
+<summary><h2>Layer 3: Application Architecture Patterns</h2></summary>
+
+<br>
 
 *Internal structure of a single application or service*
 
-## **Presentation / UI Architecture Patterns**
+<details>
+<summary><h3>Presentation / UI Architecture Patterns</h3></summary>
+
+<br>
 
 Patterns that dictate how user interfaces are structured and how they communicate with underlying business logic.
 
-- **Model-View-Controller (MVC):** Separates user interface into Model (data), View (presentation), and Controller (logic).
-- **Model-View-Presenter (MVP):** Presenter handles all UI logic, making the View passive.
-- **Model-View-ViewModel (MVVM):** Supports two-way data binding between View and ViewModel.
-- **Presentation-Abstraction-Control (PAC):** Hierarchical structure for multi-agent interactive systems; each agent has presentation, abstraction, and control components.
-- **Flux / Redux Architecture:** Unidirectional data flow (Action -> Dispatcher -> Store -> View) for client-side applications.
-- **Micro Frontends Architecture:** Decomposes a web application into independent, feature-based frontend modules.
+<details>
+<summary><strong>Model-View-Controller (MVC):</strong> Separates user interface into Model (data), View (presentation), and Controller (logic).</summary>
 
-## **Domain-Centric / Layering Architectures**
+The classic pattern for decoupling data representation from user interaction. The Model manages the data and business rules, the View displays the information, and the Controller intercepts user input to update the Model. It is the architectural foundation of modern web development, allowing for independent evolution of the user interface and core business logic.
+
+- **Examples:**
+  - [gitlabhq/gitlabhq](https://github.com/gitlabhq/gitlabhq): A primary implementation of the MVC pattern using Ruby on Rails for a massive, real-world server-side rendered application.
+  - [moodle/moodle](https://github.com/moodle/moodle): An open-source learning platform utilizing a strict MVC architecture to manage complex student data and course presentation.
+- **Resources:**
+  - [GUI Architectures](https://martinfowler.com/eaaDev/uiArchs.html) by Martin Fowler: A deep dive into the evolution of MVC and its variants.
+
+</details>
+
+<details>
+<summary><strong>Model-View-Presenter (MVP):</strong> Presenter handles all UI logic, making the View passive.</summary>
+
+A derivation of MVC where the Presenter acts as a middleman. In MVP, the View is "passive"; it does not listen to the Model directly. Instead, the Presenter retrieves data from the Model, formats it, and instructs the View exactly what to display. This enhances the testability of UI logic by removing direct dependencies on UI frameworks.
+
+- **Examples:**
+  - [signalapp/Signal-Android](https://github.com/signalapp/Signal-Android): Historically utilized MVP for many core Android activities to ensure encryption logic remained isolated from OS-level UI code.
+- **Resources:**
+  - [Model-View-Presenter](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93presenter): An overview of the Supervising Controller and Passive View variations.
+
+</details>
+
+<details>
+<summary><strong>Model-View-ViewModel (MVVM):</strong> Supports two-way data binding between View and ViewModel.</summary>
+
+A pattern designed to leverage data-binding technologies. The ViewModel provides a specialized data model for the View, containing "view state" such as input validation or button status. Through two-way binding, changes in the UI update the ViewModel, and changes in the ViewModel refresh the UI without manual DOM or widget manipulation.
+
+- **Examples:**
+  - [kiwix/kiwix-android](https://github.com/kiwix/kiwix-android): An open-source offline reader that implements MVVM using Android Architecture Components to bind library state to the UI.
+  - [Anki-Android/Anki-Android](https://github.com/ankidroid/Anki-Android): A popular flashcard application using MVVM to manage complex states of card reviews and deck management.
+- **Resources:**
+  - [WPF Apps With The MVVM Design Pattern](https://learn.microsoft.com/en-us/archive/msdn-magazine/2009/february/patterns-wpf-apps-with-the-mvvm-design-pattern) by Microsoft: The foundational article that popularized MVVM.
+
+</details>
+
+<details>
+<summary><strong>Flux / Redux Architecture:</strong> Unidirectional data flow for client-side applications.</summary>
+
+A pattern designed to manage complex state in single-page applications (SPAs). It enforces a strict one-way data loop: Actions are sent to a central Dispatcher, which updates a Store. The Store then notifies the View to re-render. This explicit and sequential state management enables predictable debugging and state tracking.
+
+- **Examples:**
+  - [zulip/zulip-mobile](https://github.com/zulip/zulip-mobile): Uses Redux to manage a single source of truth for all chat messages and user presence state in its mobile client.
+  - [wordpress-mobile/WordPress-Android](https://github.com/wordpress-mobile/WordPress-Android): Employs a Flux-based architecture (FluxC) to manage content synchronization across the mobile application.
+- **Resources:**
+  - [Flux Concepts](https://facebookarchive.github.io/flux/docs/in-depth-overview/): The original documentation defining the unidirectional data flow.
+
+</details>
+
+<details>
+<summary><strong>Micro Frontends Architecture:</strong> Decomposes a web application into independent frontend modules.</summary>
+
+An organizational and technical pattern that extends microservices to the frontend. A large application is decomposed into independent, feature-based modules developed and deployed by different teams. These modules are integrated at runtime to present a seamless experience to the user.
+
+- **Examples:**
+  - [openmrs/openmrs-esm-core](https://github.com/openmrs/openmrs-esm-core): The frontend for the Open Medical Record System, built on micro-frontend architecture to allow modular hospital customisation.
+- **Resources:**
+  - [Micro Frontends](https://martinfowler.com/articles/micro-frontends.html) by Cam Jackson: A technical guide to composition and integration strategies.
+
+</details>
+
+</details>
+
+<details>
+<summary><h3>Domain-Centric / Layering Architectures</h3></summary>
+
+<br>
 
 Patterns defining the macro-structure of internal layers to isolate the core business domain from infrastructure.
 
-- **Hexagonal Architecture (Ports and Adapters):** Isolates core domain logic from external concerns (UI, database, APIs) via ports and adapters.
-- **Clean Architecture:** Concentric rings (Entities, Use Cases, Interface Adapters, Frameworks) enforcing the Dependency Rule.
-- **Onion Architecture:** Similar to Clean, with domain model at the core and dependencies inward.
+<details>
+<summary><strong>Hexagonal Architecture (Ports and Adapters):</strong> Isolates core domain logic via ports and adapters.</summary>
 
-## **Data Source & Object-Relational Patterns**
+An architectural style that treats business logic as the core of the application, isolated from external concerns. Communication occurs through "Ports" (interfaces), which are implemented by "Adapters" to connect to specific technologies such as databases or APIs. This ensures high testability and allows for technology swaps without impacting core business logic.
+
+- **Examples:**
+  - [Sairyss/domain-driven-hexagon](https://github.com/Sairyss/domain-driven-hexagon): A TypeScript reference application demonstrating strict domain isolation and business logic protection.
+- **Resources:**
+  - [Hexagonal architecture](https://alistair.cockburn.us/hexagonal-architecture/) by Alistair Cockburn: The original article defining the ports and adapters terminology.
+
+</details>
+
+<details>
+<summary><strong>Clean Architecture:</strong> Concentric rings enforcing the Dependency Rule.</summary>
+
+A refinement of layering patterns that organizes code into concentric circles where dependencies point strictly inward. The innermost circle contains stable business rules (Entities), while the outermost layers handle frameworks and drivers. This ensures that changes in external tools never force a change in the core business rules.
+
+- **Examples:**
+  - [android10/Android-CleanArchitecture](https://github.com/android10/Android-CleanArchitecture): A classic reference application implementing Clean Architecture principles for mobile development.
+  - [ivanpaulovich/clean-architecture-manga](https://github.com/ivanpaulovich/clean-architecture-manga): A .NET implementation that follows strict Clean Architecture rules to manage a library system.
+- **Resources:**
+  - [The Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) by Robert C. Martin: The definitive post outlining the layers and the Dependency Rule.
+
+</details>
+
+<details>
+<summary><strong>Onion Architecture:</strong> Domain model at the core with inward-pointing dependencies.</summary>
+
+This architecture places the Domain Model at the center, surrounded by Domain Services, Application Services, and Infrastructure. It relies on Dependency Inversion: the core defines the interfaces, and the outer layers implement them, ensuring the application is built around the business domain rather than technology stacks.
+
+- **Examples:**
+  - [jasontaylordev/CleanArchitecture](https://github.com/jasontaylordev/CleanArchitecture): An industry-standard .NET template for Onion-style layering with a central domain core.
+- **Resources:**
+  - [The Onion Architecture](https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/) by Jeffrey Palermo: The original series defining the architecture and its tiers.
+
+</details>
+
+</details>
+
+<details>
+<summary><h3>Data Source & Object-Relational Patterns</h3></summary>
+
+<br>
 
 Patterns managing how in-memory application objects interact with the underlying database or persistence layer.
 
-- **Repository Pattern:** Mediates between domain and data mapping layers, acting like an in-memory collection.
-- **Active Record:** An object that wraps a database row, encapsulating both data and behavior.
-- **Data Mapper:** Separates in-memory objects from the database, transferring data between them independently.
-- **Unit of Work:** Maintains a list of objects affected by a transaction and coordinates writes and concurrency.
-- **Lazy Loading:** Delays loading of an object until needed to improve performance.
-- **Identity Map:** Ensures each object is loaded only once per transaction by maintaining a map.
+<details>
+<summary><strong>Repository Pattern:</strong> Mediates between domain and data mapping layers.</summary>
 
-## **Domain-Driven Design (DDD) Patterns**
+An abstraction layer acting as a gatekeeper between business logic and the database. It provides a collection-like interface (e.g., `Add`, `Find`) for accessing domain objects, hiding the details of data retrieval. This facilitates persistence ignorance in business logic and simplifies unit testing via in-memory implementation.
 
-Concepts that help model complex business rules and boundaries.
+- **Examples:**
+  - [Sairyss/domain-driven-hexagon](https://github.com/Sairyss/domain-driven-hexagon): Every domain aggregate has a corresponding Repository interface implemented in the infrastructure layer to isolate the domain from the database.
+  - [android10/Android-CleanArchitecture](https://github.com/android10/Android-CleanArchitecture): Coordinates data retrieval from local caches and remote network sources using the Repository pattern.
+- **Resources:**
+  - [The Repository Pattern](https://martinfowler.com/eaaCatalog/repository.html) by Martin Fowler: The definitive definition of the pattern.
 
-- **Bounded Context:** A DDD pattern delineating explicit boundaries within which a domain model applies.
-- **Aggregate:** A cluster of domain objects treated as a unit for data changes, with a root entity ensuring consistency.
-- **Domain Event:** An event that domain experts care about, triggered within the application logic.
+</details>
 
-## **State Management & Data Flow Patterns**
+<details>
+<summary><strong>Active Record:</strong> An object that wraps a database row, encapsulating both data and behavior.</summary>
+
+A pattern where the data model object contains the logic to manage its own persistence (save, update, delete). Each instance corresponds directly to a database row. It is optimized for rapid development and CRUD-heavy applications.
+
+- **Examples:**
+  - [mastodon/mastodon](https://github.com/mastodon/mastodon): A Ruby on Rails application where core entities (Users, Statuses) contain both business data and persistence logic.
+  - [discourse/discourse](https://github.com/discourse/discourse): Utilizes Active Record to manage its forum state and user interactions.
+- **Resources:**
+  - [Active Record](https://martinfowler.com/eaaCatalog/activeRecord.html) by Martin Fowler: An overview of the pattern's structure and trade-offs.
+
+</details>
+
+</details>
+
+<details>
+<summary><h3>State Management & Data Flow Patterns</h3></summary>
+
+<br>
 
 Patterns defining how application state is mutated, stored, and propagated.
 
-- **CQRS (Command Query Responsibility Segregation):** Separates data modification (commands) from data retrieval (queries).
-- **Event Sourcing:** Stores state as a sequence of events; current state derived by replaying the event log.
-- **Materialized View:** Generates and stores pre-calculated read models from complex queries or event streams to dramatically optimize read performance.
-- **State Machine (Finite State Machine):** Manages complex entity lifecycles by explicitly defining allowed states and the specific events that trigger transitions between them.
-- **Reactive Architecture (Reactive Streams):** Models data as asynchronous, observable streams, allowing application components to react to data changes dynamically and non-blockingly.
+<details>
+<summary><strong>CQRS (Command Query Responsibility Segregation):</strong> Separates data modification from data retrieval.</summary>
 
-## **Concurrency & Performance Patterns**
+An architecture that splits the traditional CRUD model into Commands (mutating state) and Queries (returning data). This allows the read and write sides of an application to be optimized and scaled independently, which is effective in complex domains where write logic and read requirements differ.
+
+- **Examples:**
+  - [dotnet/eShop](https://github.com/dotnet/eShop): The Ordering microservice strictly separates incoming REST commands from database queries using the MediatR library.
+  - [kgrzybek/modular-monolith-with-ddd](https://github.com/kgrzybek/modular-monolith-with-ddd): Enforces CQRS across business modules, separating write-model entities from read-model DTOs.
+- **Resources:**
+  - [CQRS](https://martinfowler.com/bliki/CQRS.html) by Martin Fowler: The foundational article defining the pattern.
+
+</details>
+
+<details>
+<summary><strong>Event Sourcing:</strong> Stores state as an immutable sequence of events.</summary>
+
+Instead of storing current state, Event Sourcing records every state-mutating action as an immutable historical event. Current state is derived by replaying the event log. This provides a reliable audit trail and enables point-in-time state reconstruction.
+
+- **Examples:**
+  - [microservices-patterns/ftgo-application](https://github.com/microservices-patterns/ftgo-application): The Accounting Service stores financial transactions as a sequence of events rather than overwriting database rows.
+  - [ornicar/lila](https://github.com/ornicar/lila): The Lichess server derives board state from the sequential, immutable log of player moves.
+- **Resources:**
+  - [Event Sourcing](https://martinfowler.com/eaaDev/EventSourcing.html) by Martin Fowler: Breakdown of replaying application state.
+
+</details>
+
+</details>
+
+<details>
+<summary><h3>Concurrency & Performance Patterns</h3></summary>
+
+<br>
 
 Patterns focused on high-throughput and low-latency execution.
 
-- **LMAX Disruptor Pattern:** A high-performance inter-thread communication architecture utilizing a mechanical sympathy approach and a ring buffer to achieve ultra-low latency without traditional locks.
-- **Software Transactional Memory (STM):** Provides a concurrency control mechanism analogous to database transactions, isolating shared memory modifications to prevent race conditions without manual lock management.
-- **Reactor Pattern:** An event handling pattern that synchronously demultiplexes and dispatches service requests delivered concurrently to an application by one or more clients.
-- **Proactor Pattern:** An asynchronous variant of the Reactor pattern where the operating system handles the I/O operations and notifies the application architecture only when the operation is fully complete.
+<details>
+<summary><strong>LMAX Disruptor Pattern:</strong> High-performance inter-thread communication via ring buffer.</summary>
 
-## **System Connectivity Patterns**
+Designed to overcome performance bottlenecks of traditional concurrent queues by using a pre-allocated ring buffer and sequence-tracking. This aligns with modern CPU hardware behavior (mechanical sympathy) to achieve massive throughput and predictable latency.
+
+- **Examples:**
+  - *Note on Examples:* The Disruptor is an infrastructure-level framework. Production applications typically consume it through high-performance tools such as logging frameworks (Log4j2) or query engines (Trino) rather than implementing it in business logic.
+- **Resources:**
+  - [The LMAX Disruptor](https://lmax-exchange.github.io/disruptor/): Official technical documentation on the ring buffer architecture.
+
+</details>
+
+<details>
+<summary><strong>Software Transactional Memory (STM):</strong> Concurrency control analogous to database transactions.</summary>
+
+Allows developers to group multiple changes to shared memory into atomic transactions. If conflicts occur, transactions are automatically retried. This eliminates deadlocks and provides a safer alternative to manual lock management.
+
+- **Examples:**
+  - [metabase/metabase](https://github.com/metabase/metabase): Relies on Clojure's native STM to safely manage global application configuration across concurrent user sessions.
+- **Resources:**
+  - [Software Transactional Memory](https://en.wikipedia.org/wiki/Software_transactional_memory): Technical overview of memory transactions.
+
+</details>
+
+</details>
+
+<details>
+<summary><h3>System Connectivity Patterns</h3></summary>
+
+<br>
 
 Patterns dictating how applications handle network reliance and synchronization.
 
-- **Offline-First Architecture:** A design paradigm where the application's core functionality is built to operate primarily against a local database, asynchronously syncing with a remote server only when network connectivity is available.
-- **Optimistic UI:** Updates the user interface immediately upon user action, assuming the asynchronous network request will succeed, and silently rolling back the local state only if a network failure occurs.
-- **Store-and-Forward:** Temporarily saves outbound application data or requests locally when destination systems are unavailable, automatically forwarding them in the background once connectivity is restored.
+<details>
+<summary><strong>Offline-First Architecture:</strong> Application operates primarily against a local database.</summary>
 
-## **Structural & Wiring Patterns**
+A design paradigm where the app reads and writes to local storage by default, ensuring instant responsiveness. Background synchronization reconciles local data with the remote server when connectivity is available, handling conflict resolution as required.
 
-Patterns handling the lifecycle and assembly of application components.
+- **Examples:**
+  - [standardnotes/app](https://github.com/standardnotes/app): A notes application that writes to local storage for seamless offline use, syncing encrypted payloads to the server in the background.
+  - [logseq/logseq](https://github.com/logseq/logseq): Functions entirely offline on local files, using background sync processes to coordinate with remote repositories.
+- **Resources:**
+  - [Offline First](https://offlinefirst.org/): Community principles for building apps for disconnected environments.
 
-- **Dependency Injection:** Externally supplies dependencies to an object, enabling testability and loose coupling.
-- **Service Locator:** Utilizes a central registry object that components can query to retrieve their necessary dependencies at runtime, serving as a pull-based alternative to push-based injection.
+</details>
 
-## **Mobile Architecture Patterns**
+<details>
+<summary><strong>Optimistic UI:</strong> Updates interface immediately assuming network success.</summary>
 
-Frameworks and structural methodologies specifically designed to manage the unique constraints, lifecycle events, and complex UI routing of native mobile applications.
+A frontend pattern that masks latency by updating the UI instantly when a user acts, before the server responds. If the background request fails, the local state is rolled back and the user is notified.
 
-- **VIPER (View, Interactor, Presenter, Entity, Router):** A strict, modular architecture for iOS applications that isolates business logic, UI manipulation, and routing into separate components to maximize testability.
-- **Clean Swift (VIP):** An architecture heavily inspired by Clean Architecture, utilizing a unidirectional data flow cycle specifically between a View, an Interactor, and a Presenter to decoupled iOS application logic.
-- **RIBs (Router, Interactor, Builder):** Uber's cross-platform mobile architecture framework that utilizes a tree of business logic components (Interactors) driven by routing state rather than being driven by the view hierarchy.
+- **Examples:**
+  - [mastodon/mastodon](https://github.com/mastodon/mastodon): Updates the UI instantly when a user "favorites" a status, incrementing counters locally before the server confirmation.
+  - [zulip/zulip-mobile](https://github.com/zulip/zulip-mobile): Displays sent chat messages immediately in the feed, showing a pending state until acknowledged by the server.
+- **Resources:**
+  - [True Lies Of Optimistic User Interfaces](https://www.smashingmagazine.com/2016/11/true-lies-of-optimistic-user-interfaces/): Psychology and technical rollback mechanisms of the pattern.
 
-## **Test Double Patterns**
+</details>
 
-Specialized structural objects used in automated testing to isolate the code under test by simulating the behavior of real, complex dependencies.
+</details>
 
-- **Dummy Object:** Objects that are passed around to satisfy API requirements but are never actually used or called within the execution of the test.
-- **Stub:** An object that provides canned, hardcoded answers to calls made during a test, usually not responding at all to anything outside what is programmed for the test.
-- **Spy:** A stub that internally records information about how it was called, such as keeping track of the number of times a specific method was invoked or the arguments that were passed to it.
-- **Mock:** An object pre-programmed with specific expectations that form a specification of the calls it is expected to receive. The test will automatically fail if the mock is not interacted with exactly as expected.
-- **Fake:** An object that contains an actual, working implementation but takes a deliberate shortcut making it unsuitable for production (for example, using a fast, local in-memory database instead of a real SQL database).
+<details>
+<summary><h3>Mobile Architecture Patterns</h3></summary>
 
----
+<br>
+
+Frameworks and methodologies designed for mobile lifecycle and routing constraints.
+
+<details>
+<summary><strong>VIPER:</strong> Isolates logic, UI, and routing into separate components.</summary>
+
+A modular architecture for iOS that removes business logic and routing from the view controller. Navigation is isolated in the Router and business rules in the Interactor, allowing for unit testing without UI components.
+
+- **Examples:**
+  - *Note on Examples:* VIPER is primarily used in large-scale proprietary enterprise applications. Reference implementations are typically observed in architectural templates rather than open-source consumer codebases.
+- **Resources:**
+  - [Architecting iOS Apps with VIPER](https://www.objc.io/issues/13-architecture/viper/): The article that introduced the pattern to the iOS community.
+
+</details>
+
+<details>
+<summary><strong>RIBs:</strong> Business logic tree driven by routing state.</summary>
+
+An architecture where business logic (Interactors) functions independently of the view hierarchy. A business process can exist and route data regardless of whether a View is currently attached, designed for large engineering teams and complex state management.
+
+- **Examples:**
+  - *Note on Examples:* RIBs is a specialized architecture used in large-scale applications such as Uber. The open-source `uber/RIBs` repository provides the framework and documentation rather than a consumer implementation.
+- **Resources:**
+  - [RIBs - Uber's cross-platform architecture](https://github.com/uber/RIBs): Technical documentation on separating View and Logic trees.
+
+</details>
+
+</details>
+
+<details>
+<summary><h3>Test Double Patterns</h3></summary>
+
+<br>
+
+Specialized objects used in automated testing to isolate code by simulating dependencies.
+
+<details>
+<summary><strong>Stub:</strong> Provides hardcoded answers to calls during a test.</summary>
+
+Stubs provide consistent data to the system under test, such as hardcoding a specific service response to isolate the test from external API variability.
+
+- **Examples:**
+  - [discourse/discourse](https://github.com/discourse/discourse): Hardcodes successful responses from external providers to verify application logic without network calls.
+  - [gitlabhq/gitlabhq](https://github.com/gitlabhq/gitlabhq): Simulates Git repository states to test UI logic without actual disk-heavy operations.
+- **Resources:**
+  - [Mocks Aren't Stubs](https://martinfowler.com/articles/mocksArentStubs.html) by Martin Fowler: Deep dive into state-based vs. interaction-based testing.
+
+</details>
+
+<details>
+<summary><strong>Fake:</strong> Working implementation unsuitable for production.</summary>
+
+Fakes are lightweight versions of real systems, such as in-memory databases, that behave like production systems during test cycles but offer significantly faster execution.
+
+- **Examples:**
+  - [dotnet/eShop](https://github.com/dotnet/eShop): Uses an InMemory database provider for integration tests to avoid SQL Server overhead.
+  - [metabase/metabase](https://github.com/metabase/metabase): Employs in-memory H2 databases to simulate data warehouse environments during testing.
+- **Resources:**
+  - [Testing with Fakes](https://github.com/google/googletest/blob/main/docs/gmock_cook_book.md#fakes): Documentation on using simplified implementations for efficiency.
+
+</details>
+
+</details>
+
+</details>
 
 # **Layer 4: Software Design Patterns**
 
