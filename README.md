@@ -49,9 +49,9 @@ Broad structural paradigms defining how the primary functional units of an appli
 - **Modular Monolith Architecture:** A monolith internally structured into modules based on business capabilities, allowing for potential extraction into microservices later.
   This pattern gained massive traction as a pragmatic reaction to the operational nightmares of distributed microservices. It applies the strict boundary contexts of Domain-Driven Design (DDD) to a single deployment unit. Teams can work independently on their isolated modules, bypassing the management of network failures, eventual consistency, or complex Kubernetes clusters. It became highly popularized by tech giants like Shopify, who proved that with strict static analysis tooling, a monolithic codebase can scale to thousands of developers without degrading into a tightly coupled mess.
   - **Examples:**
-    - [spring-projects/spring-modulith](https://github.com/spring-projects/spring-modulith): An official Spring extension for building and verifying modular monoliths in Java.
-    - [kgrzybek/modular-monolith-with-ddd](https://github.com/kgrzybek/modular-monolith-with-ddd): A comprehensive .NET reference implementation using strict Domain-Driven Design boundaries.
-    - [Shopify/packwerk](https://github.com/Shopify/packwerk): A static analysis tool created by Shopify to enforce modular boundaries within large Ruby applications.
+    - [Sairyss/domain-driven-hexagon](https://github.com/Sairyss/domain-driven-hexagon): A full TypeScript reference application implementing a modular monolith for an e-commerce domain.
+    - [danilofes/modular-monolith-architecture](https://github.com/danilofes/modular-monolith-architecture): A Java/Spring Boot reference application demonstrating a modular monolith for an online store.
+    - [kgrzybek/modular-monolith-with-ddd](https://github.com/kgrzybek/modular-monolith-with-ddd): A comprehensive .NET reference application using strict Domain-Driven Design boundaries.
   - **Resources:**
     - [Deconstructing the Monolith](https://shopify.engineering/deconstructing-monolith-designing-software-that-grows) by Shopify Engineering: A detailed case study on Shopify's transition to a modular monolith.
     - "Modular Monoliths" by Simon Brown: Structural guidelines for maintaining clean boundaries in a single deployment unit.
@@ -69,8 +69,7 @@ Broad structural paradigms defining how the primary functional units of an appli
 - **Service-Oriented Architecture (SOA):** Coarse-grained, reusable services provide business functionality via a communications protocol, often mediated by an Enterprise Service Bus (ESB).
   Dominating the enterprise landscape in the early 2000s, SOA was the precursor to microservices. SOA focused on integrating massive, monolithic enterprise applications (like ERPs and CRMs) across a company using standardized protocols (typically SOAP and XML). It heavily relied on "smart pipes": centralized Enterprise Service Buses (ESBs) that handled routing, transformation, and security. Ultimately, SOA's reputation suffered due to the heavy vendor lock-in, bloated middleware, and complex governance required to maintain it, paving the way for the "dumb pipes, smart endpoints" philosophy of modern distributed systems.
   - **Examples:**
-    - [apache/camel-examples](https://github.com/apache/camel-examples): Practical implementations of integration and routing patterns essential for SOA.
-    - [wso2/product-ei](https://github.com/wso2/product-ei): The repository for WSO2 Enterprise Integrator, a classic Enterprise Service Bus (ESB) implementation.
+    - [apereo/cas](https://github.com/apereo/cas): The Central Authentication Service, a standalone enterprise application providing single sign-on services, acting as a core node in a broader Service-Oriented Architecture.
   - **Resources:**
     - "SOA in Practice: The Art of Distributed System Design" by Nicolai M. Josuttis: A practical guide to implementing SOA in enterprise environments.
     - [Service-Oriented Architecture](https://www.ibm.com/topics/soa) by IBM: An architectural overview and history of SOA patterns.
@@ -88,8 +87,7 @@ Broad structural paradigms defining how the primary functional units of an appli
 - **Cell-Based Architecture:** The system is divided into isolated, self-contained "cells" to limit failure blast radius and enable massive scale.
   Originally pioneered by cloud providers like AWS to manage global infrastructure scale (using Availability Zones and deployment "stamps"), cell-based architecture was formalized as a composable software pattern by organizations like WSO2. The system is divided into functional "cells": independent, deployable units containing their own API gateway, logic, and data. If a cell fails or is overwhelmed by traffic, the blast radius is strictly contained to that specific cell or routing partition, ensuring the broader system remains online. It is the architecture of choice for systems requiring hyper-resilience and massive multi-tenancy.
   - **Examples:**
-    - [wso2/cellery](https://github.com/wso2/cellery): A specialized architecture language and tooling set for building composable cells on Kubernetes.
-    - [wso2/reference-architecture](https://github.com/wso2/reference-architecture): The foundational specification and methodology documents defining the Cell-Based Architecture approach.
+    - *Note on Examples:* Cell-Based Architecture is a macro-level cloud infrastructure deployment paradigm used by massive organizations to manage global traffic and blast radiuses. Because it relies on orchestrating physical infrastructure zones and routing layers rather than a specific codebase structure, there are no single, deployable open-source application repositories that represent it.
   - **Resources:**
     - [Cell-Based Architecture Reference](https://github.com/wso2/reference-architecture/blob/master/reference-architecture-cell-based.md) by Asanka Abeysinghe: The original whitepaper defining the pattern.
     - [Workload Isolation Using Shuffle Sharding](https://aws.amazon.com/builders-library/workload-isolation-using-shuffle-sharding/) by AWS Architecture Blog: Amazon's documentation on limiting blast radius using cell-based concepts.
@@ -111,7 +109,7 @@ High-level models describing how processing tasks, physical resources, and netwo
   A physical and logical extension of the client-server model. The system is physically separated into distinct tiers, most commonly presentation, application logic, and data storage. Each tier runs on its own infrastructure and only communicates with the tier immediately adjacent to it. This isolation allows teams to scale the database independently from the web servers and provides an extra layer of security, as the presentation layer cannot directly access the data layer.
   - **Examples:**
     - [nopSolutions/nopCommerce](https://github.com/nopSolutions/nopCommerce): An open-source e-commerce cart structured as a multi-tier ASP.NET application.
-    - [spring-petclinic/spring-petclinic](https://github.com/spring-petclinic/spring-petclinic): The reference application demonstrating a 3-tier architecture using the Spring framework.
+    - [spring-projects/spring-petclinic](https://github.com/spring-projects/spring-petclinic): The reference application demonstrating a 3-tier architecture using the Spring framework.
   - **Resources:**
     - [N-tier architecture style](https://learn.microsoft.com/en-us/azure/architecture/guide/architecture-styles/n-tier) by Microsoft Azure Architecture Center: A guide on structuring and deploying N-tier applications in the cloud.
     - "Patterns of Enterprise Application Architecture" by Martin Fowler: Covers the layering patterns that form the basis of N-tier systems.
@@ -129,7 +127,7 @@ High-level models describing how processing tasks, physical resources, and netwo
 - **Hub and Spoke Architecture:** A centralized network or messaging topology where a central hub acts as the single point of transit routing traffic and data to distributed nodes (spokes).
   A centralized routing topology designed to simplify network connections. All nodes (spokes) connect directly to a single central router or message broker (the hub). The hub handles all message routing, filtering, and delivery. It drastically reduces the number of connections required in a large system but makes the hub a critical bottleneck that must be highly available.
   - **Examples:**
-    - [apache/activemq](https://github.com/apache/activemq): A message broker that acts as the central hub routing messages between application spokes.
+    - [mattermost/mattermost-server](https://github.com/mattermost/mattermost-server): A central collaboration server that acts as a hub, routing messages, webhooks, and integrations between various third-party application spokes.
     - [signalapp/Signal-Server](https://github.com/signalapp/Signal-Server): The server repository for Signal, functioning as a hub that securely routes encrypted messages between mobile client spokes.
   - **Resources:**
     - [Hub-and-spoke network topology](https://learn.microsoft.com/en-us/azure/architecture/reference-architectures/hybrid-networking/hub-spoke) by Microsoft Azure: A guide to applying this topology for enterprise cloud networking.
@@ -138,8 +136,8 @@ High-level models describing how processing tasks, physical resources, and netwo
 - **Edge Computing Architecture:** Processes data near the source (on edge nodes) to reduce latency and bandwidth use.
   A distributed computing paradigm that brings computation and data storage closer to the physical location where it is needed. Processing happens on local edge nodes like routers, base stations, or local servers. It drastically reduces latency, conserves backhaul bandwidth, and enables real-time processing for applications requiring immediate feedback.
   - **Examples:**
-    - [kubeedge/kubeedge](https://github.com/kubeedge/kubeedge): A Kubernetes-native edge computing framework that extends containerized application orchestration to edge devices.
-    - [cloudflare/workers-sdk](https://github.com/cloudflare/workers-sdk): The open-source tooling for building and deploying applications directly to Cloudflare's edge network.
+    - [home-assistant/core](https://github.com/home-assistant/core): A local home automation platform that processes data entirely on the edge node (a local server) to ensure zero latency and offline functionality.
+    - [pi-hole/pi-hole](https://github.com/pi-hole/pi-hole): A network-level application deployed on local edge hardware to process and filter DNS requests before they leave the local network.
   - **Resources:**
     - [What is Edge Computing?](https://www.cloudflare.com/learning/serverless/glossary/what-is-edge-computing/) by Cloudflare: An explanation of edge architectures and their benefits over centralized cloud processing.
     - "Edge Computing: Fundamentals, Advances and Applications" by K. Anitha Kumari: A look at edge computing models.
@@ -178,7 +176,7 @@ Structural organizations that define how internal modules, execution tiers, or p
 - **Pipe-and-Filter Architecture:** Processes data streams through independent processing steps (filters) connected by channels (pipes).
   The classic data processing pipeline. It breaks complex data transformations into a series of independent, single-purpose components called filters. These filters are strung together via communication channels called pipes. Data flows continuously from one filter to the next, with each component modifying or analyzing the stream before passing it along. It is highly prevalent in command-line environments, compiler design, and enterprise integration tools.
   - **Examples:**
-    - [apache/camel](https://github.com/apache/camel): An enterprise integration framework that implements routing and data transformation using pipelines.
+    - [FFmpeg/FFmpeg](https://github.com/FFmpeg/FFmpeg): The ultimate example of a pipe-and-filter application, where distinct processing filters (decoders, scalers, encoders) are chained together via channels to process video and audio streams.
     - [elastic/logstash](https://github.com/elastic/logstash): A server-side data processing pipeline that ingests data from multiple sources, transforms it, and sends it to a "stash."
   - **Resources:**
     - [Pipes and Filters pattern](https://learn.microsoft.com/en-us/azure/architecture/patterns/pipes-and-filters) by Microsoft Azure: A guide to applying this pattern for cloud-based data processing.
@@ -196,7 +194,7 @@ Structural organizations that define how internal modules, execution tiers, or p
 - **Object-Oriented Architecture:** Components are objects that encapsulate data and behavior, communicating through method calls.
   Models the system as a collection of interacting entities. Components are defined as objects that encapsulate both state (data) and behavior (methods). Objects communicate with each other exclusively through defined method calls, enforcing information hiding and clear interfaces. It forms the structural basis of massive enterprise applications built in Java, C#, and C++, emphasizing reusability through patterns like inheritance and polymorphism.
   - **Examples:**
-    - [junit-team/junit5](https://github.com/junit-team/junit5): The standard Java testing framework, showcasing deep object-oriented principles, inheritance, and polymorphism.
+    - [jfree/jfreechart](https://github.com/jfree/jfreechart): A massive, classic Java charting application that serves as a textbook example of deep object-oriented class hierarchies, encapsulation, and polymorphism.
     - [iluwatar/java-design-patterns](https://github.com/iluwatar/java-design-patterns): A repository explicitly dedicated to demonstrating object-oriented design patterns.
   - **Resources:**
     - "Design Patterns: Elements of Reusable Object-Oriented Software" by the Gang of Four: The standard text on object-oriented software design.
@@ -227,8 +225,7 @@ Macro-architectures built specifically to ingest, store, route, and process mass
 - **Lambda Architecture:** Designed for big data processing, combining batch processing for comprehensive views and stream processing for real-time views.
   An approach to big data processing that provides a robust, fault-tolerant system against hardware failures and human mistakes. It processes massive quantities of data by providing both batch-processing and stream-processing methods simultaneously. The batch layer manages the historical archive and computes accurate views, while the speed layer handles recent data for low-latency queries. The serving layer indexes the output for fast querying.
   - **Examples:**
-    - [apache/spark](https://github.com/apache/spark): Unified analytics engine for large-scale data processing, often used to implement both the batch and speed layers.
-    - [apache/storm](https://github.com/apache/storm): A distributed realtime computation system frequently used for the speed layer in Lambda architectures.
+    - *Note on Examples:* Lambda is a macro-pipeline design pattern used in enterprise big data systems. It is built by wiring together separate infrastructure engines (like Hadoop for batch and Storm for speed). Therefore, there is no single "Lambda Architecture" open-source application repository; it is a deployment strategy used by data engineering teams across varied infrastructure.
   - **Resources:**
     - [How to beat the CAP theorem](http://nathanmarz.com/blog/how-to-beat-the-cap-theorem.html) by Nathan Marz: The original blog post introducing the Lambda Architecture.
     - "Big Data: Principles and best practices of scalable realtime data systems" by Nathan Marz and James Warren: The comprehensive book on building Lambda architectures.
@@ -236,8 +233,7 @@ Macro-architectures built specifically to ingest, store, route, and process mass
 - **Kappa Architecture:** A simplification of Lambda, using a single stream processing engine for both real-time and batch data.
   A data processing architecture designed to simplify the complexities of large-scale data systems. It uses a single technology stack for both real-time and batch processing, treating everything as a continuous stream of events. Historical data is re-processed by replaying the event stream through the same processing engine used for real-time data, maintaining a unified pipeline for all computations.
   - **Examples:**
-    - [apache/kafka](https://github.com/apache/kafka): A distributed event streaming platform acting as the central immutable log and stream processing backbone for Kappa architectures.
-    - [apache/flink](https://github.com/apache/flink): A framework and distributed processing engine for stateful computations over unbounded and bounded data streams.
+    - *Note on Examples:* Kappa is an enterprise data pipeline philosophy that treats all data as a continuous stream. It is constructed by deploying and configuring streaming engines (like Kafka and Flink). Since it is a conceptual infrastructure pipeline rather than a single application codebase, there are no standalone application examples available in open-source repositories.
   - **Resources:**
     - [Questioning the Lambda Architecture](https://www.oreilly.com/radar/questioning-the-lambda-architecture/) by Jay Kreps: The original article proposing the Kappa Architecture as an alternative to Lambda.
     - [Kappa Architecture Introduction](https://hazelcast.com/glossary/kappa-architecture/) by Hazelcast: A clear breakdown of the Kappa architecture principles.
@@ -254,8 +250,7 @@ Macro-architectures built specifically to ingest, store, route, and process mass
 - **Batch Sequential Architecture:** Programs run independently in a predefined order, passing data as files; used in traditional data processing.
   A classic data processing pattern where separate, independent programs execute in a strict sequence. Each program runs to completion, reads an input file, processes the data, and writes an output file that becomes the input for the exact next program in the sequence. It is highly effective for scheduled, high-volume data transformations like end-of-day financial reconciliation or payroll processing.
   - **Examples:**
-    - [spring-projects/spring-batch](https://github.com/spring-projects/spring-batch): A lightweight, comprehensive batch framework designed to enable the development of robust batch applications essential for the daily operations of enterprise systems.
-    - [apache/airflow](https://github.com/apache/airflow): A platform created by the community to programmatically author, schedule, and monitor batch workflows and data pipelines.
+    - *Note on Examples:* Batch Sequential is a traditional enterprise workflow where discrete, standalone scripts execute sequentially, passing files between them. Because it relies on the orchestration of many separate business scripts (like end-of-day payroll or banking reconciliation pipelines), there are no unified, open-source repositories that represent a full Batch Sequential business application.
   - **Resources:**
     - [Batch Processing Documentation](https://docs.spring.io/spring-batch/reference/) by Spring: Comprehensive guidelines on structuring and managing batch sequential jobs.
     - [Enterprise Integration Patterns: Process Manager](https://www.enterpriseintegrationpatterns.com/patterns/messaging/ProcessManager.html) by Gregor Hohpe: Architectural patterns related to routing and sequential processing of large workloads.
@@ -270,19 +265,17 @@ Macro-architectures built specifically to ingest, store, route, and process mass
     - [Architecture of a Database System](https://dsf.berkeley.edu/papers/fntdb07-architecture.pdf) by Joseph M. Hellerstein, Michael Stonebraker, and James Hamilton: An in-depth paper on how relational database engines are constructed.
 
 - **Data Mesh:** A decentralized sociotechnical architecture that treats data as a product, with domain teams owning and serving their data.
-  A decentralized approach to data architecture that distributes responsibility directly to the specific business domains that generate the data. Each domain team owns its data pipelines and serves its data as a fully functional "product" to the rest of the organization. A federated governance structure ensures these distinct data products remain interoperable and secure across the broader enterprise. Because Data Mesh is an organizational paradigm and not a single software package, the examples below represent the core open-source tools used to build a mesh.
-  - **Examples (Building Blocks):**
-    - [apache/iceberg](https://github.com/apache/iceberg): An open table format for huge analytic datasets, heavily utilized by domain teams to build and serve decentralized data products.
-    - [amundsen-io/amundsen](https://github.com/amundsen-io/amundsen): A data discovery and metadata engine used to locate and understand the decentralized data products across the mesh.
+  A decentralized approach to data architecture that distributes responsibility directly to the specific business domains that generate the data. Each domain team owns its data pipelines and serves its data as a fully functional "product" to the rest of the organization. A federated governance structure ensures these distinct data products remain interoperable and secure across the broader enterprise.
+  - **Examples:**
+    - *Note on Examples:* Data Mesh is a decentralized, sociotechnical organizational paradigm, not a software application. It dictates how different domain teams within a massive enterprise govern and share their data. Because it is a corporate restructuring of data ownership heavily reliant on internal governance and disparate tools, there is no open-source application codebase that represents a Data Mesh.
   - **Resources:**
     - [How to Move Beyond a Monolithic Data Lake to a Distributed Data Mesh](https://martinfowler.com/articles/data-monolith-to-mesh.html) by Zhamak Dehghani: The original article introducing the Data Mesh paradigm.
     - "Data Mesh: Delivering Data-Driven Value at Scale" by Zhamak Dehghani: The comprehensive book detailing the implementation and organizational shifts required for a data mesh.
 
 - **Data Fabric:** An architecture that provides a unified data plane across hybrid and multi-cloud environments.
-  An architecture that utilizes machine learning and metadata to automatically discover, connect, and secure data across disparate systems and cloud providers. It creates a unified, virtualized data layer, allowing users and applications to access information seamlessly across all physical locations and storage formats. Like Data Mesh, Data Fabric is an enterprise-wide integration strategy rather than a single application, so the examples below represent the federated querying and governance tools required to build it.
-  - **Examples (Building Blocks):**
-    - [trinodb/trino](https://github.com/trinodb/trino): A distributed SQL query engine designed to query large data sets distributed over heterogeneous data sources, acting as the federated query layer of a data fabric.
-    - [apache/atlas](https://github.com/apache/atlas): A scalable and extensible set of core foundational governance services enabling enterprises to manage the metadata required to bind a data fabric together.
+  An architecture that utilizes machine learning and metadata to automatically discover, connect, and secure data across disparate systems and cloud providers. It creates a unified, virtualized data layer, allowing users and applications to access information seamlessly across all physical locations and storage formats.
+  - **Examples:**
+    - *Note on Examples:* Data Fabric is a conceptual, enterprise-wide integration strategy that uses AI and metadata to stitch together data across multiple private and public clouds. It is achieved by buying or deploying dozens of interconnected governance, cataloging, and virtualization platforms. As a macro-level IT strategy, there are no single open-source applications that embody a Data Fabric.
   - **Resources:**
     - [What is a Data Fabric?](https://www.ibm.com/topics/data-fabric) by IBM: A clear definition and overview of the components that make up a data fabric.
     - [What is a Data Fabric?](https://www.sap.com/insights/what-is-a-data-fabric.html) by SAP: A detailed breakdown of data fabric concepts, core components, and how it unifies data management across environments.
@@ -332,32 +325,120 @@ Distributed models dictating how disparate services exchange information, react 
 Paradigms designed to handle complex state management, high-throughput parallelism, and distributed transactions without traditional locking bottlenecks.
 
 - **Actor Model Architecture:** A conceptual model for concurrent computation where "actors" are the universal primitives, modifying their own state and communicating exclusively through asynchronous message passing (e.g., Erlang, Akka).
+  A highly concurrent topology where the system is composed of thousands or millions of independent, lightweight entities called "actors." Each actor strictly encapsulates its own private state and thread of execution. Because actors never share memory and only interact by sending asynchronous messages to each other's mailboxes, the system completely eliminates the need for traditional thread locking and mutexes. It is the architecture of choice for massively concurrent, fault-tolerant systems like multiplayer game servers and telecommunication switches. 
+  - **Examples:**
+    - [ornicar/lila](https://github.com/ornicar/lila): The core backend application for Lichess.org. It is built using Scala and the Akka actor framework to handle millions of concurrent chess matches, player states, and real-time websocket connections without locking bottlenecks.
+    - [rabbitmq/rabbitmq-server](https://github.com/rabbitmq/rabbitmq-server): The widely used message broker, built natively in Erlang. Its internal architecture is a textbook implementation of the Actor model, where millions of lightweight actor processes handle queuing, routing, and state management concurrently.
+  - **Resources:**
+    - [The Actor Model in 10 Minutes](https://www.brianstorti.com/the-actor-model/) by Brian Storti: An accessible breakdown of how actors manage state, concurrency, and message mailboxes.
+    - "Reactive Messaging Patterns with the Actor Model" by Vaughn Vernon: A deep dive into building enterprise systems using actor-based concurrency.
+
 - **Space-Based Architecture (Tuple Space):** Uses distributed shared memory to avoid database bottlenecks, scaling horizontally for high-volume, variable traffic.
+  An architecture designed to completely eliminate the database as a performance bottleneck. Instead of applications querying a central database over a network, data is partitioned and held in memory across a grid of active processing units. The application logic and the data it operates on are co-located in RAM (the "space"). It scales horizontally by spinning up more processing units, making it highly effective for systems dealing with extreme, unpredictable spikes in traffic, such as high-frequency trading platforms, ticketing systems, and real-time bidding engines. 
+  - **Examples:**
+    - *Note on Examples:* Space-Based Architecture is an enterprise deployment topology rather than a standalone application design. It is implemented by deploying business logic directly into distributed In-Memory Data Grid (IMDG) middleware. Because it relies heavily on orchestrating these specialized grid engines (like Apache Ignite or Hazelcast) across a cluster, there are no single, deployable open-source business application repositories that fully represent the topology natively.
+  - **Resources:**
+    - [Space-Based Architecture Pattern](https://www.oreilly.com/library/view/software-architecture-patterns/9781491971437/ch04.html) by Mark Richards: The definitive architectural explanation of processing units, virtualized middleware, and data grids.
+    - [Tuple Space](https://en.wikipedia.org/wiki/Tuple_space): An overview of the foundational distributed computing concept that evolved into modern space-based architectures.
+
 - **Saga Architecture:** Manages distributed transactions across microservices using a sequence of local transactions with compensating actions.
+  A distributed transactional pattern that solves the problem of maintaining data consistency across multiple, independent databases. Because loosely coupled microservices cannot share a single ACID database transaction, a Saga breaks a large business transaction into a series of smaller, local steps. If one downstream step fails, the system executes a series of "compensating transactions" (rollbacks) to undo the preceding steps. It ensures eventual consistency without relying on synchronous, distributed locking protocols like Two-Phase Commit (2PC). 
+  - **Examples:**
+    - [microservices-patterns/ftgo-application](https://github.com/microservices-patterns/ftgo-application): The definitive reference application for microservices, specifically engineered to demonstrate Saga choreography and orchestration for a complex "Food to Go" order management system.
+    - [berndruecker/trip-booking-saga-java](https://github.com/berndruecker/trip-booking-saga-java): A pure business application demonstrating a travel booking saga (booking a flight, hotel, and car sequentially), highlighting the execution of compensating actions when a remote booking fails.
+  - **Resources:**
+    - [Pattern: Saga](https://microservices.io/patterns/data/saga.html) by Chris Richardson: The industry-standard definition and breakdown of orchestration versus choreography in Sagas.
+    - [Saga distributed transactions](https://learn.microsoft.com/en-us/azure/architecture/reference-architectures/saga/saga) by Microsoft Azure: A practical guide on implementing the Saga pattern for cloud-based microservices.
 
 ## **Knowledge, AI & Control Systems Architectures**
 
 Specialized macro-structures designed for autonomous reasoning, inference, pattern recognition, and physical hardware management.
 
 - **Agentic Architecture (Multi-Agent Systems):** An emerging AI-driven topology where autonomous systems (agents) utilize large language models to reason, plan, and execute actions, often collaborating to achieve complex goals.
+  A dynamic topology heavily relying on Large Language Models (LLMs) as central reasoning engines. Instead of following deterministic, hardcoded paths, the system defines high-level goals and equips "agents" with tools (calculators, web search, API access). These agents autonomously plan their execution steps, reflect on intermediate results, and communicate with other specialized agents to solve complex, open-ended problems. It represents a massive shift from imperative programming to goal-oriented, autonomous orchestration. 
+  - **Examples:**
+    - [Significant-Gravitas/AutoGPT](https://github.com/Significant-Gravitas/AutoGPT): A highly popular open-source application that acts as an autonomous agent, chaining together LLM thoughts to independently achieve user-defined goals.
+    - [OpenBMB/ChatDev](https://github.com/OpenBMB/ChatDev): A virtual software company application where multiple distinct AI agents (acting as a CEO, programmer, and reviewer) collaborate autonomously to build software based on a single prompt.
+  - **Resources:**
+    - [LLM Powered Autonomous Agents](https://lilianweng.github.io/posts/2023-06-23-agent/) by Lilian Weng: The definitive technical breakdown of agent planning, memory, and tool use.
+    - [AutoGPT Documentation](https://docs.agpt.co/): Practical implementation guides for autonomous agent loops.
+
 - **Blackboard Architecture:** Multiple specialized subsystems collaborate on a shared data structure (blackboard), common in AI and pattern recognition.
+  An early AI pattern designed for complex, non-deterministic problems like speech recognition or structural protein modeling. It features a central global memory space (the blackboard) and a collection of independent, specialized knowledge sources (the "experts"). There is no central control flow dictating the sequence of operations. Each expert constantly monitors the blackboard. When an expert sees data it can process, it updates the blackboard with a partial solution, which triggers other experts to contribute until a final solution emerges. 
+  - **Examples:**
+    - [stanfordnlp/CoreNLP](https://github.com/stanfordnlp/CoreNLP): The core Stanford NLP application utilizes a pipeline heavily inspired by the Blackboard pattern. A shared `Annotation` object (the blackboard) is passed around and modified by independent annotators (experts in Part-of-Speech tagging, Named Entity Recognition, parsing) to build a complete linguistic analysis.
+  - **Resources:**
+    - [Blackboard System](https://en.wikipedia.org/wiki/Blackboard_system): An overview of the control shell, blackboard, and knowledge sources.
+    - "Pattern-Oriented Software Architecture, Volume 1" (POSA): Contains the definitive formalization of the Blackboard pattern.
+
 - **Rule-Based System Architecture:** An inference engine applies a set of rules to a knowledge base to derive conclusions; used in expert systems.
+  A foundational pattern of classical symbolic AI, often referred to as an "Expert System." It strictly separates the business logic (the rules) from the execution control (the inference engine). Human domain experts define a massive knowledge base of "IF-THEN" facts and conditions. The inference engine then dynamically evaluates incoming data against these rules, firing applicable rules to deduce new facts or trigger actions. It is highly effective for complex compliance, medical diagnosis, and automated underwriting systems where decision logic must be strictly auditable. 
+  - **Examples:**
+    - [eslint/eslint](https://github.com/eslint/eslint): A pure rule-based application where a core engine evaluates an Abstract Syntax Tree (AST) against hundreds of independent, pluggable rules to infer code quality and trigger warnings.
+    - [Yelp/elastalert](https://github.com/Yelp/elastalert): An application that alerts on anomalies from Elasticsearch by continuously evaluating data against a massive dictionary of user-defined rules.
+  - **Resources:**
+    - [Rule-Based System](https://en.wikipedia.org/wiki/Rule-based_system): An overview of inference engines and expert systems.
+    - "Expert Systems: Principles and Programming" by Joseph C. Giarratano and Gary D. Riley: The classic textbook on designing rule-based architectures.
+
 - **Closed-Loop Control Architecture (Process Control):** Manages physical processes through sensors and actuators (thermostat, cruise control, embedded systems).
+  An architecture fundamentally bound to the physical world, operating in a continuous, infinite loop to maintain a desired physical state. It relies on a sensor to read the current state of a system, compares that reading to a desired setpoint to calculate an error value, and immediately sends a corrective command to a physical actuator. The system relies entirely on this continuous feedback loop to adapt to external physical disturbances. It is the dominant software architecture for industrial robotics, autonomous vehicles, and HVAC systems. 
+  - **Examples:**
+    - [ArduPilot/ardupilot](https://github.com/ArduPilot/ardupilot): The highly popular open-source autopilot software suite, built precisely around high-frequency closed-loop PID controllers to maintain aircraft stability.
+    - [commaai/openpilot](https://github.com/commaai/openpilot): An open-source autonomous driving application that uses closed-loop control architectures to continuously adjust a vehicle's steering and acceleration based on real-time camera and radar feedback.
+  - **Resources:**
+    - [Control Theory](https://en.wikipedia.org/wiki/Control_theory): The foundational mathematics and concepts of feedback loops.
+    - "Feedback Control of Dynamic Systems" by Gene F. Franklin: The standard engineering text detailing the design of closed-loop software and hardware.
+
 - **Real-Time Architecture:** Systems where response time is critical and must be guaranteed (e.g., avionics, medical devices).
+  An architecture defined by strict deterministic timing constraints rather than pure throughput. In a real-time architecture, calculating the correct answer too late is considered a complete system failure. To guarantee execution within microsecond deadlines, these systems utilize specialized Real-Time Operating Systems (RTOS), avoid unpredictable garbage collection pauses, and strictly partition memory. They are essential for safety-critical hardware like pacemakers, anti-lock braking systems, and orbital satellites. 
+  - **Examples:**
+    - [PX4/PX4-Autopilot](https://github.com/PX4/PX4-Autopilot): An open-source flight control application that specifically targets real-time operating systems (like NuttX) to guarantee strict deterministic timing for drone motor control.
+    - [nasa/cFS](https://github.com/nasa/cFS): The Core Flight System developed by NASA, a real-time software framework and application suite used in actual spaceflight missions where missing a processing deadline can result in mission failure.
+  - **Resources:**
+    - [Real-Time Computing](https://en.wikipedia.org/wiki/Real-time_computing): An overview of hard, firm, and soft real-time constraints.
+    - "Real-Time Systems Design and Analysis" by Phillip A. Laplante: A comprehensive guide on structuring determinism into software architectures.
 
 ## **System Migration & Hybrid Topologies**
 
 Transitional or composite architectural models used to bridge distinct computing environments or gracefully phase out legacy monolithic systems.
 
 - **Strangler Fig Architecture:** Incrementally replaces a legacy system by building a new system around it and gradually routing functionality to it.
+  A migration pattern used to safely modernize massive, monolithic legacy systems. A routing facade is placed in front of the legacy application. As development teams build new, modernized services, the facade intercepts requests and redirects them to the new services while routing the remaining unmigrated traffic to the legacy system. Over time, the new system grows around the old one, completely replacing its functionality until the legacy system can be safely decommissioned.
+  - **Examples:**
+    - *Note on Examples:* Strangler Fig is a transient migration strategy applied to existing, usually proprietary, enterprise codebases rather than a standalone architectural end-state. Because it describes the active process of rewriting and routing traffic away from a specific legacy system, there are no open-source application repositories built natively as "Strangler Fig" applications.
+  - **Resources:**
+    - [StranglerFigApplication](https://martinfowler.com/bliki/StranglerFigApplication.html) by Martin Fowler: The original article coining the term and outlining the migration strategy.
+    - [Strangler Fig pattern](https://learn.microsoft.com/en-us/azure/architecture/patterns/strangler-fig) by Microsoft Azure: A practical guide to implementing the facade and routing necessary for the migration.
+
 - **Hybrid Architecture / Multi-Cloud Architecture:** Combines multiple architectural styles or deployment across multiple cloud providers.
+  A macro-level deployment topology that spans physical on-premises data centers and one or more public cloud environments. It provides organizations with extreme flexibility, allowing them to keep highly sensitive data on local hardware for regulatory compliance while bursting variable workloads into the public cloud to utilize infinite horizontal scaling. It relies heavily on container orchestration platforms to maintain consistent application behavior across completely different physical environments.
+  - **Examples:**
+    - *Note on Examples:* Hybrid and Multi-Cloud architectures are infrastructure deployment strategies managed by networking and orchestration layers (like Google Anthos, Azure Arc, or Kubernetes Federation). A business application deployed in a hybrid setup is just a standard application (often microservices) mapped across different servers. Therefore, there is no single open-source codebase that embodies "Hybrid Architecture."
+  - **Resources:**
+    - [What is a Hybrid Cloud?](https://www.redhat.com/en/topics/cloud-computing/what-is-hybrid-cloud) by Red Hat: A clear breakdown of how on-premises and cloud resources are integrated.
+    - [Multi-cloud architecture patterns](https://cloud.google.com/architecture/multi-cloud-architecture) by Google Cloud: Industry-standard deployment models for distributing workloads across different providers.
 
 ## **Information & Resource Linking Topologies**
 
 Architectures fundamentally based on centralizing shared data access or connecting distributed documents via associative references.
 
 - **Hypertext System Architecture:** Documents (nodes) interconnected by links; the foundation of the World Wide Web.
+  A non-linear architectural paradigm where discrete blocks of information (nodes) are connected via associative references (hyperlinks). It completely decouples the storage of information from its structural presentation, allowing users to navigate dynamically based on context rather than a strict hierarchy. This is the foundational architecture of the World Wide Web, modern documentation platforms, and associative note-taking applications.
+  - **Examples:**
+    - [wikimedia/mediawiki](https://github.com/wikimedia/mediawiki): The core application powering Wikipedia, acting as a massive, dynamic hypertext system where millions of nodes are interconnected via associative links.
+    - [logseq/logseq](https://github.com/logseq/logseq): A local-first, non-linear outliner application built entirely on a hypertext architecture, using bidirectional links to connect and traverse thought nodes autonomously.
+  - **Resources:**
+    - [As We May Think](https://www.theatlantic.com/magazine/archive/1945/07/as-we-may-think/303881/) by Vannevar Bush: The foundational 1945 essay that conceptualized the Memex, the precursor to hypertext architectures.
+    - [Information Management: A Proposal](https://www.w3.org/History/1989/proposal.html) by Tim Berners-Lee: The original architectural proposal for the World Wide Web, defining the structural use of nodes and hypertext links.
+
 - **Repository Architecture:** Centralized data store accessed by multiple independent components (e.g., database-centric systems).
+  A data-centric topology where a single, central repository holds the shared state of the system, and a collection of independent software components operate on that centralized data. The components interact almost exclusively through the repository rather than communicating directly with one another. It is highly effective for systems dealing with complex, shared data structures where different, decoupled tools need to read, analyze, and modify the same source of truth simultaneously.
+  - **Examples:**
+    - [git/git](https://github.com/git/git): The core version control application operates natively as a repository architecture. Independent command components (`commit`, `status`, `log`) do not communicate with each other; they all execute their logic by reading and writing to the central `.git` object database.
+    - [WordPress/WordPress](https://github.com/WordPress/WordPress): An example of a web-based repository architecture. The central database holds all state, and independent components (the core rendering engine, diverse plugins, and themes) independently interact with this central data store without requiring direct component-to-component messaging.
+  - **Resources:**
+    - "Software Architecture: Perspectives on an Emerging Discipline" by Mary Shaw and David Garlan: Provides a deep academic breakdown of the shared-data and repository architectural styles.
+    - "Software Architecture in Practice" by Len Bass, Paul Clements, and Rick Kazman: Discusses the operational benefits and scalability constraints of centralizing application state within a single repository layer.
 
 ---
 
