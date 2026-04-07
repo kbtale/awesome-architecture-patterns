@@ -2352,10 +2352,12 @@ A pattern that centralizes identity management. Instead of every application man
   - [OpenID Connect](https://openid.net/connect/): The official specifications for the identity layer built on top of the OAuth 2.0 protocol.
 </details>
 
+</details>
+
 <details>
 <summary><h3>Data Architecture Patterns</h3></summary>
 
-Holistic strategies defining the structure, management, and governance of an organization's data assets at rest and in motion.
+Strategies defining the structure, management, and governance of an organization's data assets at rest and in motion.
 
 <details>
 <summary><strong>Data Lake:</strong> A centralized, highly scalable repository that stores massive volumes of raw, unstructured, and structured data in its native format.</summary>
@@ -2410,7 +2412,6 @@ It uses active metadata, knowledge graphs, and machine learning to automate data
 </details>
 
 </details>
-n pattern.
 
 <details>
 <summary><h3>Deployment Architecture Patterns</h3></summary>
@@ -2659,7 +2660,7 @@ A pattern that allows different domain teams to independently develop, deploy, a
 <details>
 <summary><h3>Enterprise Architecture Frameworks</h3></summary>
 
-*Holistic frameworks for managing the entire enterprise's architecture; these are not software architectures per se but define categories of architecture from a business and IT strategy perspective*
+*Frameworks for managing the entire enterprise's architecture; these are not software architectures per se but define categories of architecture from a business and IT strategy perspective*
 
 <details>
 <summary><strong>Business Architecture:</strong> Defines business strategy, governance, organization, and key business processes.</summary>
