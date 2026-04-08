@@ -33,11 +33,9 @@ This compilation synthesizes and organizes concepts from several core software e
 * [Cross-Cutting Architectural Concerns](#cross-cutting-architectural-concerns)
 * [Enterprise Architecture Frameworks](#enterprise-architecture-frameworks)
 
-<details>
-<summary><h2>Layer 1: System Architecture Patterns</h2></summary>
+## Layer 1: System Architecture Patterns
 
-<details>
-<summary><h3>Core Application Deployment Topologies</h3></summary>
+### Core Application Deployment Topologies
 
 Broad structural paradigms defining how the primary functional units of an application are packaged, scaled, and deployed over underlying infrastructure.
 
@@ -128,11 +126,9 @@ originally pioneered by cloud providers like AWS to manage global infrastructure
 
 </details>
 
-</details>
 
 
-<details>
-<summary><h3>Network & Node Distribution Topologies</h3></summary>
+### Network & Node Distribution Topologies
 
 High-level models describing how processing tasks, physical resources, and network traffic are partitioned across distinct logical nodes.
 
@@ -221,11 +217,9 @@ A specialized topology for managing arrays of constrained hardware devices. A lo
 
 </details>
 
-</details>
 
 
-<details>
-<summary><h3>Component Interaction & Layering Topologies</h3></summary>
+### Component Interaction & Layering Topologies
 
 Structural organizations that define how internal modules, execution tiers, or processing steps are arranged and invoke one another.
 
@@ -327,11 +321,9 @@ Built to execute custom instructions or domain-specific languages. It functions 
 
 </details>
 
-</details>
 
 
-<details>
-<summary><h3>Data-Centric & Big Data Processing Topologies</h3></summary>
+### Data-Centric & Big Data Processing Topologies
 
 Macro-architectures built specifically to ingest, store, route, and process large volumes of information across distributed clusters or unified planes.
 
@@ -433,11 +425,9 @@ An architecture that uses machine learning and metadata to automatically discove
 
 </details>
 
-</details>
 
 
-<details>
-<summary><h3>Event, Messaging & Communication Topologies</h3></summary>
+### Event, Messaging & Communication Topologies
 
 Distributed models dictating how disparate services exchange information, react to state changes, and manage request routing dynamically.
 
@@ -497,11 +487,9 @@ A structural pattern used to abstract the complexity of backend microservices. A
 
 </details>
 
-</details>
 
 
-<details>
-<summary><h3>Concurrency, State & Transactional Topologies</h3></summary>
+### Concurrency, State & Transactional Topologies
 
 Paradigms facilitating complex state management, high-throughput parallelism, and distributed transactions without traditional locking bottlenecks.
 
@@ -546,11 +534,9 @@ A distributed transactional pattern that solves the problem of maintaining data 
 
 </details>
 
-</details>
 
 
-<details>
-<summary><h3>Knowledge, AI & Control Systems Architectures</h3></summary>
+### Knowledge, AI & Control Systems Architectures
 
 Specialized macro-structures for autonomous reasoning, inference, pattern recognition, and physical hardware management.
 
@@ -623,11 +609,9 @@ An architecture defined by strict deterministic timing constraints rather than p
 
 </details>
 
-</details>
 
 
-<details>
-<summary><h3>System Migration & Hybrid Topologies</h3></summary>
+### System Migration & Hybrid Topologies
 
 Transitional or composite architectural models used to bridge distinct computing environments or gracefully phase out legacy monolithic systems.
 
@@ -658,11 +642,9 @@ A macro-level deployment topology that spans physical on-premises data centers a
 
 </details>
 
-</details>
 
 
-<details>
-<summary><h3>Information & Resource Linking Topologies</h3></summary>
+### Information & Resource Linking Topologies
 
 Architectures fundamentally based on centralizing shared data access or connecting distributed documents via associative references.
 
@@ -694,19 +676,15 @@ A data-centric topology where a single, central repository holds the shared stat
 
 </details>
 
-</details>
 
-</details>
 
-<details>
-<summary><h2>Layer 2: Enterprise Integration Patterns</h2></summary>
+## Layer 2: Enterprise Integration Patterns
 
 <br>
 
 *Communication and data flow between major components or services*
 
-<details>
-<summary><h3>Message Channel Patterns</h3></summary>
+### Message Channel Patterns
 
 <br>
 
@@ -766,10 +744,8 @@ A Quality of Service (QoS) topology preventing data loss in highly volatile envi
 
 </details>
 
-</details>
 
-<details>
-<summary><h3>Message Routing Patterns</h3></summary>
+### Message Routing Patterns
 
 <br>
 
@@ -888,10 +864,8 @@ The core mechanism for horizontal scaling. It is a reverse proxy, intercepting a
 
 </details>
 
-</details>
 
-<details>
-<summary><h3>Message Transformation Patterns</h3></summary>
+### Message Transformation Patterns
 
 <br>
 
@@ -962,10 +936,8 @@ A pattern essential for integrating multiple diverse systems that speak differen
 
 </details>
 
-</details>
 
-<details>
-<summary><h3>Messaging Endpoint Patterns</h3></summary>
+### Messaging Endpoint Patterns
 
 <br>
 
@@ -1068,10 +1040,8 @@ A client endpoint that groups database updates and message publishing into a sin
 
 </details>
 
-</details>
 
-<details>
-<summary><h3>API Gateway Patterns</h3></summary>
+### API Gateway Patterns
 
 <br>
 
@@ -1126,10 +1096,8 @@ The most core feature of an API gateway, as an intelligent Layer 7 (application 
 
 </details>
 
-</details>
 
-<details>
-<summary><h3>Resilience Patterns</h3></summary>
+### Resilience Patterns
 
 <br>
 
@@ -1224,10 +1192,8 @@ An observability pattern mandated by modern container orchestration. The applica
 
 </details>
 
-</details>
 
-<details>
-<summary><h3>Saga Patterns</h3></summary>
+### Saga Patterns
 
 <br>
 
@@ -1260,10 +1226,8 @@ This pattern operates like a conductor leading an orchestra. A single, centraliz
 
 </details>
 
-</details>
 
-<details>
-<summary><h3>Streaming Patterns</h3></summary>
+### Streaming Patterns
 
 <br>
 
@@ -1312,10 +1276,8 @@ The "gold standard" for Change Data Capture. While some CDC methods use database
 
 </details>
 
-</details>
 
-<details>
-<summary><h3>System Management Patterns</h3></summary>
+### System Management Patterns
 
 <br>
 
@@ -1361,10 +1323,8 @@ A persistence pattern for system accountability. Unlike standard application log
 
 </details>
 
-</details>
 
-<details>
-<summary><h3>Database & Domain Integration Patterns</h3></summary>
+### Database & Domain Integration Patterns
 
 <br>
 
@@ -1398,19 +1358,15 @@ When a modern application must interface with a legacy system or a third-party A
 
 </details>
 
-</details>
 
-</details>
 
-<details>
-<summary><h2>Layer 3: Application Architecture Patterns</h2></summary>
+## Layer 3: Application Architecture Patterns
 
 <br>
 
 *Internal structure of a single application or service*
 
-<details>
-<summary><h3>Presentation / UI Architecture Patterns</h3></summary>
+### Presentation / UI Architecture Patterns
 
 <br>
 
@@ -1479,10 +1435,8 @@ An organizational and technical pattern that extends microservices to the fronte
 
 </details>
 
-</details>
 
-<details>
-<summary><h3>Domain-Centric / Layering Architectures</h3></summary>
+### Domain-Centric / Layering Architectures
 
 <br>
 
@@ -1525,10 +1479,8 @@ This architecture places the Domain Model at the center, surrounded by Domain Se
 
 </details>
 
-</details>
 
-<details>
-<summary><h3>Data Source & Object-Relational Patterns</h3></summary>
+### Data Source & Object-Relational Patterns
 
 <br>
 
@@ -1560,10 +1512,8 @@ A pattern where the data model object contains the logic to manage its own persi
 
 </details>
 
-</details>
 
-<details>
-<summary><h3>State Management & Data Flow Patterns</h3></summary>
+### State Management & Data Flow Patterns
 
 <br>
 
@@ -1595,10 +1545,8 @@ Instead of storing current state, Event Sourcing records every state-mutating ac
 
 </details>
 
-</details>
 
-<details>
-<summary><h3>Concurrency & Performance Patterns</h3></summary>
+### Concurrency & Performance Patterns
 
 <br>
 
@@ -1629,10 +1577,8 @@ Allows developers to group multiple changes to shared memory into atomic transac
 
 </details>
 
-</details>
 
-<details>
-<summary><h3>System Connectivity Patterns</h3></summary>
+### System Connectivity Patterns
 
 <br>
 
@@ -1664,10 +1610,8 @@ A frontend pattern that masks latency by updating the UI instantly when a user a
 
 </details>
 
-</details>
 
-<details>
-<summary><h3>Mobile Architecture Patterns</h3></summary>
+### Mobile Architecture Patterns
 
 <br>
 
@@ -1697,10 +1641,8 @@ An architecture where business logic (Interactors) functions independently of th
 
 </details>
 
-</details>
 
-<details>
-<summary><h3>Test Double Patterns</h3></summary>
+### Test Double Patterns
 
 <br>
 
@@ -1732,19 +1674,15 @@ Fakes are lightweight versions of real systems, such as in-memory databases, tha
 
 </details>
 
-</details>
 
-</details>
 
-<details>
-<summary><h2>Layer 4: Software Design Patterns</h2></summary>
+## Layer 4: Software Design Patterns
 
 <br>
 
 *Micro-level solutions for object-oriented design problems*
 
-<details>
-<summary><h3>Creational Patterns</h3></summary>
+### Creational Patterns
 
 <br>
 
@@ -1834,10 +1772,8 @@ A performance optimization pattern when creating an object is expensive (such as
 
 </details>
 
-</details>
 
-<details>
-<summary><h3>Structural Patterns</h3></summary>
+### Structural Patterns
 
 <br>
 
@@ -1941,10 +1877,8 @@ A pattern where a proxy object is an intermediary for another object. It can be 
 
 </details>
 
-</details>
 
-<details>
-<summary><h3>Behavioral Patterns</h3></summary>
+### Behavioral Patterns
 
 <br>
 
@@ -2118,10 +2052,8 @@ A pattern that replaces null checks with a specialized object that implements th
 
 </details>
 
-</details>
 
-<details>
-<summary><h3>Concurrency Patterns</h3></summary>
+### Concurrency Patterns
 
 <br>
 
@@ -2211,10 +2143,8 @@ A pattern used to optimize lazy initialization in multi-threaded environments. I
 
 </details>
 
-</details>
 
-<details>
-<summary><h3>Functional Patterns</h3></summary>
+### Functional Patterns
 
 <br>
 
@@ -2290,17 +2220,13 @@ An architectural pattern that separates logic from action. Instead of injecting 
 
 </details>
 
-</details>
 
-</details>
 
-<details>
-<summary><h2>Cross-Cutting Architectural Concerns</h2></summary>
+## Cross-Cutting Architectural Concerns
 
 *Patterns that permeate all layers and boundaries of a system*
 
-<details>
-<summary><h3>Security Architecture Patterns</h3></summary>
+### Security Architecture Patterns
 
 Patterns and mechanisms maintaining system safety, secure access control, data confidentiality, and overall regulatory compliance across all systemic boundaries.
 
@@ -2368,10 +2294,8 @@ A pattern that centralizes identity management. Instead of every application man
   - [OpenID Connect](https://openid.net/connect/): The official specifications for the identity layer built on top of the OAuth 2.0 protocol.
 </details>
 
-</details>
 
-<details>
-<summary><h3>Data Architecture Patterns</h3></summary>
+### Data Architecture Patterns
 
 Strategies defining the structure, management, and governance of an organization's data assets at rest and in motion.
 
@@ -2427,10 +2351,8 @@ It uses active metadata, knowledge graphs, and machine learning to automate data
 
 </details>
 
-</details>
 
-<details>
-<summary><h3>Deployment Architecture Patterns</h3></summary>
+### Deployment Architecture Patterns
 
 Strategies and topologies for provisioning, delivering, managing, and scaling physical or cloud-based computational resources.
 
@@ -2499,10 +2421,8 @@ An architectural pattern heavily used in containerized environments. It abstract
 
 </details>
 
-</details>
 
-<details>
-<summary><h3>Observability Architecture Patterns</h3></summary>
+### Observability Architecture Patterns
 
 Telemetry mechanisms that offer deep external visibility into system health, performance, and complex internal states.
 
@@ -2558,10 +2478,8 @@ Often referred to as black-box monitoring, it confirms that critical user paths 
 
 </details>
 
-</details>
 
-<details>
-<summary><h3>DevOps Architecture Patterns</h3></summary>
+### DevOps Architecture Patterns
 
 Paradigms bridging software development and IT operations through heavy automation, continuous delivery pipelines, and programmatic infrastructure management.
 
@@ -2604,10 +2522,8 @@ Continuous Integration makes sure that code changes are frequently merged and va
 
 </details>
 
-</details>
 
-<details>
-<summary><h3>FinOps Architecture Patterns</h3></summary>
+### FinOps Architecture Patterns
 
 Architectural design and engineering practices strictly optimized for cloud financial management, making variable infrastructure costs highly visible, predictable, and directly correlated to business value.
 
@@ -2637,10 +2553,8 @@ Moves cloud spending from a centralized IT overhead expense to a decentralized m
 
 </details>
 
-</details>
 
-<details>
-<summary><h3>Federated Architecture Patterns</h3></summary>
+### Federated Architecture Patterns
 
 Decentralized system models enabling multiple autonomous entities or nodes to securely interoperate using shared standards without relying on a single central governing authority.
 
@@ -2670,11 +2584,9 @@ A pattern that allows different domain teams to independently develop, deploy, a
 
 </details>
 
-</details>
 
 
-<details>
-<summary><h3>Enterprise Architecture Frameworks</h3></summary>
+### Enterprise Architecture Frameworks
 
 *Frameworks for managing the entire enterprise's architecture; these are not software architectures per se but define categories of architecture from a business and IT strategy perspective*
 
@@ -2769,6 +2681,4 @@ An emerging domain that maps how an organization structurally facilitates intern
 
 </details>
 
-</details>
 
-</details>
