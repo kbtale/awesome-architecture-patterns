@@ -35,6 +35,8 @@ This compilation synthesizes and organizes concepts from several core software e
 
 ## Layer 1: System Architecture Patterns
 
+This layer is about the high-level structure and how a system is deployed. It covers how to split an application into pieces and spread them across a network. Whether using a monolith or microservices, these patterns handle scaling, regional failures, and large-scale data processing.
+
 ### Core Application Deployment Topologies
 
 Broad structural paradigms defining how the primary functional units of an application are packaged, scaled, and deployed over underlying infrastructure.
@@ -682,7 +684,7 @@ A data-centric topology where a single, central repository holds the shared stat
 
 <br>
 
-*Communication and data flow between major components or services*
+Integration is the 'glue' that lets different services and old systems talk to each other. Instead of focusing on internal logic, this layer handles moving, converting, and syncing data between services. It provides patterns for messaging, gateways, and distributed tasks (Sagas) so that network delays or partial failures don't break the whole enterprise.
 
 ### Message Channel Patterns
 
@@ -1336,7 +1338,7 @@ Bridging techniques that safely synchronize strict database transactions with ev
 In distributed systems, updating a database and publishing a message to a broker (the "dual-write") is not atomic; one can succeed while the other fails, leading to data inconsistency. This pattern solves the issue by creating an "Outbox" table in the same database as the business entities. Every time a business record is updated, a corresponding event record is inserted into the Outbox table within the same ACID transaction. A separate relay process (like a polling thread or a CDC tool) then reads the Outbox table and reliably publishes the messages to the broker.
 
 - **Examples:**
-  - [microservices-patterns/ftgo-application](https://github.com/microservices-patterns/ftgo-application): The primary reference application for Chris Richardson’s "Microservices Patterns," which explicitly implements the Transactional Outbox using a specialized `MessagePublishingWatcher` to relay events from a MySQL outbox table.
+  - [microservices-patterns/ftgo-application](https://github.com/microservices-patterns/ftgo-application): The primary reference application for Chris Richardson's "Microservices Patterns," which explicitly implements the Transactional Outbox using a specialized `MessagePublishingWatcher` to relay events from a MySQL outbox table.
   - [dotnet-architecture/eShopOnContainers](https://github.com/dotnet-architecture/eShopOnContainers): A detailed .NET reference application that uses an Integration Event Log (acting as a Transactional Outbox) so that catalog updates and order placements are reliably broadcast to other microservices.
 - **Resources:**
   - [Pattern: Transactional outbox](https://microservices.io/patterns/data/transactional-outbox.html) by Chris Richardson: The industry-standard definition and implementation guide.
@@ -1364,7 +1366,7 @@ When a modern application must interface with a legacy system or a third-party A
 
 <br>
 
-*Internal structure of a single application or service*
+This layer is about how a single app or service is organized inside. The main goal is to keep the business logic separate from frameworks, databases, and UIs. Patterns like Clean or Hexagonal architecture keep the core code easy to test and make it possible to swap out a database without changing the way the app works.
 
 ### Presentation / UI Architecture Patterns
 
@@ -1680,7 +1682,7 @@ Fakes are lightweight versions of real systems, such as in-memory databases, tha
 
 <br>
 
-*Micro-level solutions for object-oriented design problems*
+These are the 'nuts and bolts' of the code - simple solutions for common coding problems. While architecture handles the layout of the whole system, design patterns handle how individual pieces are built and connected. This covers classic object-oriented setups, functional programming, and patterns for safe multi-tasking.
 
 ### Creational Patterns
 
@@ -2220,11 +2222,9 @@ An architectural pattern that separates logic from action. Instead of injecting 
 
 </details>
 
-
-
 ## Cross-Cutting Architectural Concerns
 
-*Patterns that permeate all layers and boundaries of a system*
+These are patterns and tools that touch every part of a software system. Unlike isolated features, these concerns - like security, observability, and data backup - affect many components and need consistent setup to keep the whole system working correctly. This category focuses on the foundations of a platform, including standards for security, tracing, and automated deployments.
 
 ### Security Architecture Patterns
 
@@ -2584,11 +2584,9 @@ A pattern that allows different domain teams to independently develop, deploy, a
 
 </details>
 
+## Enterprise Architecture Frameworks
 
-
-### Enterprise Architecture Frameworks
-
-*Frameworks for managing the entire enterprise's architecture; these are not software architectures per se but define categories of architecture from a business and IT strategy perspective*
+These are ways to manage how a large company links its business and IT strategy. They are not software architectures in the narrow sense; instead, they define how business processes, data, and technical tools work together. These frameworks help align business goals with technical work to support long-term growth and technical change.
 
 <details>
 <summary><strong>Business Architecture:</strong> Defines business strategy, governance, organization, and key business processes.</summary>
