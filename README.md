@@ -1,9 +1,16 @@
 <div align="center">
 
 <h1>Awesome Architecture Patterns</h1>
-Choose a language
 
-[![English](https://img.shields.io/badge/-English-blue.svg)](README.md) [![Español](https://img.shields.io/badge/-Español-red.svg)](README.es.md) [![中文](https://img.shields.io/badge/-中文-lightgrey.svg)](README.zh.md)
+[![Awesome](https://img.shields.io/badge/Awesome-list-green?style=for-the-badge&logo=awesome-lists&logoColor=white)](https://github.com/kbtale/awesome-architecture-patterns)
+[![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge&logo=open-source-initiative&logoColor=white)](LICENSE)
+[![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-brightgreen?style=for-the-badge&logo=github&logoColor=white)](CONTRIBUTING.md)
+
+<br>
+
+[![English](https://img.shields.io/badge/-English-blue?style=for-the-badge&logoColor=white)](README.md)
+[![Español](https://img.shields.io/badge/-Español-red?style=for-the-badge&logoColor=white)](README.es.md)
+[![中文](https://img.shields.io/badge/-中文-orange?style=for-the-badge&logoColor=white)](README.zh.md)
 
 </div>
 
@@ -677,6 +684,10 @@ A data-centric topology where a single, central repository holds the shared stat
   - "Software Architecture in Practice" by Len Bass, Paul Clements, and Rick Kazman: Discusses the operational benefits and scalability constraints of centralizing application state within a single repository layer.
 
 </details>
+
+<br>
+
+[![Back to top](https://img.shields.io/badge/-Back_to_top-6f42c1?style=for-the-badge&logoColor=white)](#table-of-contents)
 
 
 
@@ -1360,6 +1371,10 @@ When a modern application must interface with a legacy system or a third-party A
 
 </details>
 
+<br>
+
+[![Back to top](https://img.shields.io/badge/-Back_to_top-6f42c1?style=for-the-badge&logoColor=white)](#table-of-contents)
+
 
 
 ## Layer 3: Application Architecture Patterns
@@ -1675,6 +1690,10 @@ Fakes are lightweight versions of real systems, such as in-memory databases, tha
   - [Testing with Fakes](https://github.com/google/googletest/blob/main/docs/gmock_cook_book.md#fakes): Documentation on using simplified implementations for efficiency.
 
 </details>
+
+<br>
+
+[![Back to top](https://img.shields.io/badge/-Back_to_top-6f42c1?style=for-the-badge&logoColor=white)](#table-of-contents)
 
 
 
@@ -2222,6 +2241,10 @@ An architectural pattern that separates logic from action. Instead of injecting 
 
 </details>
 
+<br>
+
+[![Back to top](https://img.shields.io/badge/-Back_to_top-6f42c1?style=for-the-badge&logoColor=white)](#table-of-contents)
+
 ## Cross-Cutting Architectural Concerns
 
 These are patterns and tools that touch every part of a software system. Unlike isolated features, these concerns - like security, observability, and data backup - affect many components and need consistent setup to keep the whole system working correctly. This category focuses on the foundations of a platform, including standards for security, tracing, and automated deployments.
@@ -2584,6 +2607,10 @@ A pattern that allows different domain teams to independently develop, deploy, a
 
 </details>
 
+<br>
+
+[![Back to top](https://img.shields.io/badge/-Back_to_top-6f42c1?style=for-the-badge&logoColor=white)](#table-of-contents)
+
 ## Enterprise Architecture Frameworks
 
 These are ways to manage how a large company links its business and IT strategy. They are not software architectures in the narrow sense; instead, they define how business processes, data, and technical tools work together. These frameworks help align business goals with technical work to support long-term growth and technical change.
@@ -2678,5 +2705,9 @@ An emerging domain that maps how an organization structurally facilitates intern
   - [Digital Ecosystem](https://en.wikipedia.org/wiki/Digital_ecosystem): A breakdown of how enterprises construct distributed, adaptive, and collaborative networks with external participants.
 
 </details>
+
+<br>
+
+[![Back to top](https://img.shields.io/badge/-Back_to_top-6f42c1?style=for-the-badge&logoColor=white)](#table-of-contents)
 
 
