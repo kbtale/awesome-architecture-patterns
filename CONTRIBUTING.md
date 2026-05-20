@@ -44,11 +44,19 @@ A comprehensive and detailed description explaining the problem, the core mechan
 ## How to Submit
 
 1. **Fork the Repository**: Create a fork and branch off from `main`.
-2. **Make Your Changes**: Update `README.md` with your new pattern, resource, or example, ensuring it complies with the contribution criteria above.
+2. **Make Your Changes**: Update `README.md` with your new pattern, resource, or example, ensuring it complies with the criteria above. If you are fluent in Spanish or Chinese, we encourage you to also update the respective translation files (`README.es.md` and/or `README.zh.md`), but this is entirely optional (see our [Multi-Language Policy](#multi-language-policy) below).
 3. **Open a Pull Request**:
    * Provide a clear and concise description of what you are adding.
    * Explain why the pattern, example, or resource is a valuable addition to the taxonomy.
    * Confirm that your additions adhere to the exact formatting standard.
+
+## Multi-Language Policy
+
+This repository is multilingual to make software architecture patterns accessible to as many developers globally as possible. To keep the catalog synchronized without adding friction for contributors, we follow these guidelines:
+
+* **English as the Source of Truth**: The English [README.md](README.md) is our primary index. All new patterns, reference implementations, and resources must be added to it.
+* **Optional Translation Submissions**: If you are comfortable translating your addition into Spanish or Chinese, you are warmly invited to update [README.es.md](README.es.md) and/or [README.zh.md](README.zh.md) within the same Pull Request.
+* **Maintainer-Led Syncing**: If you only submit your changes in English, your contribution is still 100% welcome! The maintainers will handle translating and syncing your additions to [README.es.md](README.es.md) and [README.zh.md](README.zh.md).
 
 ## Code of Conduct
 
