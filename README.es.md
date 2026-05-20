@@ -3,8 +3,8 @@
 <h1>Awesome Architecture Patterns</h1>
 
 [![Awesome](https://img.shields.io/badge/Awesome-lista-green?style=for-the-badge&logo=awesome-lists&logoColor=white)](https://github.com/kbtale/awesome-architecture-patterns)
-[![Licencia](https://img.shields.io/badge/Licencia-MIT-blue?style=for-the-badge&logo=open-source-initiative&logoColor=white)](LICENSE)
-[![PRs bienvenidos](https://img.shields.io/badge/PRs-Bienvenidos-brightgreen?style=for-the-badge&logo=github&logoColor=white)](CONTRIBUTING.es.md)
+[![Licencia: CC0-1.0](https://img.shields.io/badge/Licencia-CC0_1.0-lightgrey.svg?style=for-the-badge&logo=creative-commons&logoColor=white)](LICENSE)
+[![PRs bienvenidos](https://img.shields.io/badge/PRs-Bienvenidos-brightgreen?style=for-the-badge&logo=github&logoColor=white)](CONTRIBUTING.md)
 
 <br>
 
